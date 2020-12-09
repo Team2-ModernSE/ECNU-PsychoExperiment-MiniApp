@@ -1,4 +1,7 @@
 // pages/home/home.js
+const app=getApp();
+const db=wx.cloud.database();
+
 Page({
 
   /**
@@ -12,9 +15,63 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.cloud.callFunction({
+      name: 'login',
+      data: {},
+      success: res => {
+        app.globalData.openid = res.result.openid
+        console.log(app.globalData.openid)
+      }
+    })
+    wx.getSetting({
+      success: function (res) {
+        console.log(res.authSetting['scope.userInfo'])
+        if(res.authSetting['scope.userInfo']){
+          wx.getUserInfo({
+            success: res=> {
+              console.log(res.userInfo)
+              db.collection('examinee').where({
+                _openid: app.globalData.openid
+              })
+              .get({
+                success: function(res){
+                  console.log(res)
+                  if(!res.data.length){
+                    console.log('fail')
+                    wx.redirectTo({
+                      url: '../../pages/register/register',
+                    })
+                  }
+                }
+              })
+            }
+          })
+        }
+        else{
+          console.log('fail')
+          wx.redirectTo({
+            url: '../../pages/auth/auth',
+          })
+        }
+      },
+    })
+    /*
+    db.collection('examinee').where({
+      _openid: app.globalData.openid
+    })
+    .get({
+      success: function(res){
+        console.log(res)
+        if(!res.data.length){
+          console.log('fail')
+          wx.redirectTo({
+            url: '../../pages/register/register',
+          })
+        }
+      }
+    })
+    */
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
