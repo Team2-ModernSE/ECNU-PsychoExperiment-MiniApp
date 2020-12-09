@@ -1,0 +1,54 @@
+{
+  "pages": [
+    "pages/search/search",
+    "pages/home/home",
+    "pages/my/my",
+    "pages/release/release",
+    "pages/screening/screening",
+    "pages/exp1/exp1",
+    "pages/index/index",  
+    "pages/userConsole/userConsole",
+    "pages/storageConsole/storageConsole",
+    "pages/databaseGuide/databaseGuide",
+    "pages/addFunction/addFunction",
+    "pages/deployFunctions/deployFunctions",
+    "pages/chooseLib/chooseLib",
+    "pages/openapi/openapi",
+    "pages/openapi/serverapi/serverapi",
+    "pages/openapi/callback/callback",
+    "pages/openapi/cloudid/cloudid",
+    "pages/im/im",
+    "pages/im/room/room"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "ECNU心理被试招募小程序",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+    {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "icon/_home.png",
+        "selectedIconPath": "icon/home.png"
+    },
+    {
+      "pagePath": "pages/search/search",
+      "text": "发现",
+      "iconPath": "icon/_search.png",
+      "selectedIconPath": "icon/search.png",
+      "enablePullDownRefresh":true
+    },
+    {
+      "pagePath": "pages/my/my",
+      "text": "个人中心",
+      "iconPath": "icon/_my.png",
+      "selectedIconPath": "icon/my.png"
+    }]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

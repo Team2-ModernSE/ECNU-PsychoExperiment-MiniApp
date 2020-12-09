@@ -1,0 +1,6 @@
+.btns {
+  margin-top: 40rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

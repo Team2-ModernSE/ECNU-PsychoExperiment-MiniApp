@@ -1,0 +1,111 @@
+<view>
+    筛选实验
+</view>
+<text >\r\n</text>
+<view class="view1">
+    性别要求:
+    <picker bindchange="changeSex" range="{{sex}}" value="{{index_sex}}">
+        <view>
+            {{sex[index_sex]}}
+        </view>
+    </picker>  
+</view>
+
+<text >\r\n</text>
+
+<view class="view1">
+    年级要求:
+    <picker bindchange="changeGrade" range="{{grade}}" value="{{index_grade}}">
+        <view>
+            {{grade[index_grade]}}
+        </view>
+    </picker>  
+</view>
+
+<text>\r\n</text>
+
+<view class="view1">
+    年龄要求:
+    <picker bindchange="changeAge" range="{{age}}" value="{{index_age}}">
+        <view>
+            {{age[index_age]}}
+        </view>
+    </picker>  
+</view>
+
+<text>\r\n</text>
+
+<view>
+    筛选实验日期范围
+</view>
+  
+<view class="view1">
+  <view class="section__title">起始日期:</view>
+  <picker mode="date" value="{{start_date}}" start="2020-12-7" end="2021-12-7" bindchange="startDateChange">
+    <view class="picker">
+      {{start_date}}
+    </view>
+  </picker>
+</view>
+
+<view class="view1">
+  <view class="section__title">结束日期:</view>
+  <picker mode="date" value="{{end_date}}" start="2020-12-7" end="2021-12-7" bindchange="endDateChange">
+    <view class="picker">
+      {{end_date}}
+    </view>
+  </picker>
+</view>
+
+<text>\r\n</text>
+
+<view>
+    筛选实验时间范围
+</view>
+
+<view class="view1">
+  <view class="section__title">起始时间:</view>
+  <picker mode="time" value="{{start_time}}" start="00:00" end="23:59" bindchange="startTimeChange">
+    <view class="picker">
+        {{start_time}}
+    </view>
+  </picker>
+</view>
+
+<view class="view1">
+  <view class="section__title">结束时间:</view>
+  <picker mode="time" value="{{end_time}}" start="00:00" end="23:59" bindchange="endTimeChange">
+    <view class="picker">
+        {{end_time}}
+    </view>
+  </picker>
+</view>
+
+<text>\r\n</text>
+
+<view class="view1">
+    实验时长:
+    <picker bindchange="durationChange" range="{{duration}}" value="{{index_dur}}">
+        <view>
+            {{duration[index_dur]}}{{"min"}}
+        </view>
+    </picker>  
+</view>
+
+<text>\r\n</text>
+
+<view class="view1">
+    实验酬劳:
+    <picker bindchange="moneyChange" range="{{money}}" value="{{index_mon}}">
+        <view>
+            {{money[index_mon]}}{{"元"}}
+        </view>
+    </picker>  
+</view>
+
+<text>\r\n</text>
+<text>\r\n</text>
+<text>\r\n</text>
+<button type = "primary" bindtap = "return">
+    确认
+</button>
