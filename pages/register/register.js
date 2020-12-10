@@ -1,11 +1,20 @@
 // pages/register/register.js
+const app = getApp();
+const db = wx.cloud.database();
+
 Page({
 
   /**
    * 页面的初始数据
    */
-  data: {
-
+  data: {   //初始化数据
+    gradeArray: ['大一', '大二', '大三', '大四', '硕士研究生/博士研究生'],
+    gradeIndex: 0,
+    handArray: ['右利手', '左利手'],
+    handIndex: 0,
+    examinerArray: ['否','是'],
+    examinerIndex: 0,
+    name: '',
   },
 
   /**
@@ -62,5 +71,77 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  nameInput: function (e) {  //获取姓名输入
+    this.setData({
+      name: e.detail.value
+    })
+  },
+
+  bindGradeChange: function (e) {  //监听年级选择
+    this.setData({
+      gradeIndex: e.detail.value
+    })
+  },
+
+  bindHandChange: function (e) {  //监听左右利手选择
+    this.setData({
+      handIndex: e.detail.value
+    })
+  },
+
+  bindExaminerChange: function (e) { //监听身份选择
+    this.setData({
+      examinerIndex: e.detail.value
+    })
+  },
+
+  submitTap: function () {
+    var submitName = this.data.name;
+    var submitGrade = this.data.gradeArray[this.data.gradeIndex];
+    var submitHand = this.data.handArray[this.data.handIndex];
+    var submitIsExaminer=this.data.handIndex==0?false:true
+    if (submitName == '') { //检测输入是否合法
+      wx.showToast({
+        title: '请输入真实姓名',
+        icon: 'none',
+        duration: 2000,
+        mask: true
+      });
+    } else {
+      db.collection('user').add({ //向数据库中插入数据
+        data: {
+          name: submitName,
+          grade: submitGrade,
+          hand: submitHand,
+          isExaminer: submitIsExaminer
+        },
+        success: function (res) { //插入成功
+          console.log(res)
+          wx.showModal({ //弹出提示框
+            title: '提示',
+            content: '个人信息完善成功',
+            showCancel: false,
+            confirmText: '回到首页',
+            success: function (res) {
+              if (res.confirm) {
+                wx.switchTab({
+                  url: '../../pages/home/home',
+                })
+              }
+            }
+          });
+        },
+        fail: function (res) { //插入失败，弹出提示框
+          wx.showModal({
+            title: '注意',
+            content: '提交失败，请重试',
+            showCancel: false,
+            confirmText: '重试'
+          })
+        }
+      })
+    }
   }
 })
