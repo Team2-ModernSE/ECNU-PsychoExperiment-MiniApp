@@ -11,7 +11,7 @@ App({
     }
     this.globalData = {
       openid: null,
-      userInfo: null
+      userInfo: null,
     }
   }
 })
