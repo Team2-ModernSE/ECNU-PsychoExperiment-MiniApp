@@ -1,3 +1,4 @@
+const app = getApp()
 Page({
   data: {
     tabTxt: ['性别', '年级', '酬劳','时长'],
@@ -9,7 +10,11 @@ Page({
     price_id: 0,
     price_txt: '',
     time_id: 0,
-    time_txt: ''
+    time_txt: '',
+    time_min:0,
+    time_max:1000,
+    price_min:0,
+    price_max:1000,
   },
   release: function () {
     wx.navigateTo({
@@ -36,6 +41,7 @@ Page({
     })
     this.getData();
   },
+
   //网络请求，获取数据
   getData() {
     wx.request({
@@ -116,7 +122,101 @@ Page({
   },
   getDataList: function () {
     //调用数据接口，获取数据
-
+    const db = wx.cloud.database();
+    const _ = db.command;
+    //var price_min;
+    //var price_max;
+    //var time_min;
+    //var time_max;
+    var sex_tag;
+    if(this.data.gender_id==='0'){
+      sex_tag = 'unknown';
+    }
+    else if(this.data.gender_id==='1'){
+      sex_tag = 'male';
+    }
+    else if(this.data.gender_id==='2'){
+      sex_tag = 'female';
+    }
+    else
+    //价钱的上下限，从id转换
+    if(this.data.price_id==='0'){
+      this.data.price_min = 0;
+      this.data.price_max = 1000;
+    }
+    else if(this.data.price_id==='1'){
+      this.data.price_min = 0;
+      this.data.price_max = 30;
+    }
+    else if(this.data.price_id==='2'){
+      this.data.price_min = 31;
+      this.data.price_max = 60;
+    }
+    else if(this.data.price_id==='3'){
+      this.data.price_min = 61;
+      this.data.price_max = 90;
+    }
+    else if(this.data.price_id==='4'){
+      this.data.price_min = 91;
+      this.data.price_max = 1000;
+    }
+    else{
+      this.data.price_min = 0;
+      this.data.price_max = 1000;
+    }
+    //设定时间上下限
+    if(this.data.time_id==='0'){
+      this.data.price_min = 0;
+      this.data.price_max = 1000;
+    }
+    else if(this.data.time_id==='1'){
+      this.data.time_min = 0;
+      this.data.time_max = 30;
+    }
+    else if(this.data.time_id==='2'){
+      this.data.time_min = 31;
+      this.data.time_max = 60;
+    }
+    else if(this.data.time_id==='3'){
+      this.data.time_min = 61;
+      this.data.time_max = 90;
+    }
+    else if(this.data.time_id==='4'){
+      this.data.time_min = 91;
+      this.data.time_max = 1000;
+    }
+    else{
+      this.data.time_min = 0;
+      this.data.time_max = 1000;
+    }
+    if(this.data.gender_id==='0'){
+      db.collection('experiment').where({
+        //sex: sex_tag,
+        //money:_.gte(90).and(_.lte(1000))
+        money: _.gte(this.data.price_min).and(_.lte(this.data.price_max)),
+        time: _.gte(this.data.time_min).and(_.lte(this.data.time_max))
+      })
+      .get({
+        success: function(res) {
+          // res.data 是包含以上定义的两条记录的数组
+          console.log(res.data)
+        }
+      })
+    }
+    else{
+    db.collection('experiment').where({
+      sex: sex_tag,
+      //money:_.gte(90).and(_.lte(1000))
+      money: _.gte(this.data.price_min).and(_.lte(this.data.price_max)),
+      time: _.gte(this.data.time_min).and(_.lte(this.data.time_max))
+    })
+    .get({
+      success: function(res) {
+        // res.data 是包含以上定义的两条记录的数组
+        console.log(res.data)
+      }
+    })
+  }
   }
 
 })
