@@ -41,7 +41,7 @@
   "compileType": "miniprogram",
   "libVersion": "2.14.1",
   "appid": "wx6941b917f6f42f2f",
-  "projectname": "miniprogram",
+  "projectname": "psychology",
   "debugOptions": {
     "hidedInDevtools": []
   },
@@ -50,23 +50,29 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
+    "plugin": {
       "list": []
     },
     "game": {
-      "list": []
-    },
-    "plugin": {
       "list": []
     },
     "gamePlugin": {
       "list": []
     },
     "miniprogram": {
-      "list": []
+      "list": [
+        {
+          "name": "pages/auth/auth",
+          "pathName": "pages/auth/auth",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/my/my",
+          "pathName": "pages/my/my",
+          "scene": null
+        }
+      ]
     }
   }
 }
