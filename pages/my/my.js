@@ -1,10 +1,11 @@
 // pages/my/my.js
+const app = getApp()
 Page({  
   data: {
-    userinfo:{}
+    userinfo: null
   },
   onShow(){
-    const userinfo=wx.getStorageSync('userinfo')
-    this.setData({userinfo})
+    const userInfo = app.globalData.userInfo
+    this.setData({userinfo:userInfo})
   }
 })
