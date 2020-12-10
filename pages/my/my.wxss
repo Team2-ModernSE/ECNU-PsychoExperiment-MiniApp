@@ -1,1 +1,57 @@
 /* pages/my/my.wxss */
+.user_bg{
+  height: 45vh;
+  overflow: hidden;
+  background-color: var(--themeColor);
+  filter:blur(10rpx);
+}
+.user_icon{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 10%;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+}
+.user_name{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 30%;
+  color: #000000;
+  font-size:50rpx;
+}
+
+.release{
+  
+  position: absolute;
+  left: 30%;
+  transform: translateX(-50%);
+  top:40%
+}
+.get{
+  position: absolute;
+  left: 70%;
+  transform: translateX(-50%);
+  top:40%
+}
+
+.name{
+  position: absolute;
+  left: 10%;
+  transform: translateX(-50%);
+  top:55%
+}
+.gender{
+  position: absolute;
+  left: 10%;
+  transform: translateX(-50%);
+  top:65%
+}
+.age{
+  position: absolute;
+  left: 10%;
+  transform: translateX(-50%);
+  top:75%
+}

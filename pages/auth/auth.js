@@ -14,14 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.cloud.callFunction({
-      name: 'login',
-      data: {},
-      success: res => {
-        app.globalData.openid = res.result.openid
-        console.log(app.globalData.openid)
-      }
-    })
+    
   },
 
   /**
@@ -77,20 +70,20 @@ Page({
       // 获取到用户的信息了，打印到控制台上看下
       console.log("用户的信息如下：");
       console.log(res.detail.userInfo);
-      //授权成功后,通过改变 isHide 的值，让实现页面显示出来，把授权页面隐藏起来
-      db.collection('examinee').where({
+      //授权成功后，检查用户的openid是否在数据库中
+      db.collection('user').where({  
         _openid: app.globalData.openid
       })
       .get({
         success: function(res){
           console.log(res)
-          if(!res.data.length){
+          if(!res.data.length){  //如果没有找到数据，则跳转到注册页面
             console.log('fail')
             wx.redirectTo({
               url: '../../pages/register/register',
             })
           }
-          else{
+          else{    //找到数据，跳转到主页
             wx.switchTab({
               url: "../../pages/home/home",
             })
