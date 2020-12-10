@@ -30,7 +30,7 @@ Page({
           wx.getUserInfo({
             success: res=> {
               console.log(res.userInfo)
-              db.collection('examinee').where({
+              db.collection('user').where({
                 _openid: app.globalData.openid
               })
               .get({
