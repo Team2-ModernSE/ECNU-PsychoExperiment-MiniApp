@@ -18,7 +18,28 @@ Page({
     others: ""
   },
   onLoad: function () {
-
+    db.collection('user').where({
+        _openid: app.globalData.openid
+      })
+      .get({
+        success: function (res) {
+          if (!res.data[0].isExaminer) {
+            wx.showModal({
+              title: '警告',
+              content: '您暂无权限，请联系管理员',
+              showCancel: false,
+              confirmText: '返回',
+              success: function (res) {
+                if (res.confirm) {
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                }
+              }
+            });
+          }
+        }
+      })
   },
   nameInput(e) {
     this.setData({
@@ -87,14 +108,14 @@ Page({
         duration: 2000,
         mask: true
       });
-    } else if (submitDate < new Date()||submitDate.toDateString()=="Invalid Date") {
+    } else if (submitDate < new Date() || submitDate.toDateString() == "Invalid Date") {
       wx.showToast({
         title: '请输入合法的日期和时间',
         icon: 'none',
         duration: 2000,
         mask: true
       });
-    } else if (submitDuration.toString() == "NaN"||submitDuration == null) {
+    } else if (submitDuration.toString() == "NaN" || submitDuration == null) {
       wx.showToast({
         title: '请输入合法的实验时长',
         icon: 'none',
@@ -108,7 +129,7 @@ Page({
         duration: 2000,
         mask: true
       });
-    } else if (submitMoney.toString() == "NaN"||submitMoney==null) {
+    } else if (submitMoney.toString() == "NaN" || submitMoney == null) {
       wx.showToast({
         title: '请输入合法的实验酬劳',
         icon: 'none',

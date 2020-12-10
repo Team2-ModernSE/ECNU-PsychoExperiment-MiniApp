@@ -5,7 +5,7 @@
     "pages/my/my",
     "pages/auth/auth",
     "pages/release/release",
-    "pages/exp1/exp1",
+    "pages/expInfo1/expInfo1",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
     "pages/databaseGuide/databaseGuide",

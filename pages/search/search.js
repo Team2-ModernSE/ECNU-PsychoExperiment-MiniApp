@@ -26,7 +26,7 @@ Page({
   },
   toExp: function () {
     wx.navigateTo({
-      url: "../../pages/exp1/exp1"
+      url: "../../pages/expInfo1/expInfo1"
     })
   },
   //刷新
@@ -119,13 +119,13 @@ Page({
     //var time_max;
     var sex_tag;
     if(this.data.gender_id==='0'){
-      sex_tag = 'unknown';
+      sex_tag = '不限';
     }
     else if(this.data.gender_id==='1'){
-      sex_tag = 'male';
+      sex_tag = '男';
     }
     else if(this.data.gender_id==='2'){
-      sex_tag = 'female';
+      sex_tag = '女';
     }
     else
     //价钱的上下限，从id转换
