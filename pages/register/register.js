@@ -7,12 +7,12 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {   //初始化数据
+  data: { //初始化数据
     gradeArray: ['大一', '大二', '大三', '大四', '硕士研究生/博士研究生'],
     gradeIndex: 0,
     handArray: ['右利手', '左利手'],
     handIndex: 0,
-    examinerArray: ['否','是'],
+    examinerArray: ['否', '是'],
     examinerIndex: 0,
     name: '',
   },
@@ -73,19 +73,19 @@ Page({
 
   },
 
-  nameInput: function (e) {  //获取姓名输入
+  nameInput: function (e) { //获取姓名输入
     this.setData({
       name: e.detail.value
     })
   },
 
-  bindGradeChange: function (e) {  //监听年级选择
+  bindGradeChange: function (e) { //监听年级选择
     this.setData({
       gradeIndex: e.detail.value
     })
   },
 
-  bindHandChange: function (e) {  //监听左右利手选择
+  bindHandChange: function (e) { //监听左右利手选择
     this.setData({
       handIndex: e.detail.value
     })
@@ -101,7 +101,7 @@ Page({
     var submitName = this.data.name;
     var submitGrade = this.data.gradeArray[this.data.gradeIndex];
     var submitHand = this.data.handArray[this.data.handIndex];
-    var submitIsExaminer=this.data.handIndex==0?false:true
+    var submitIsExaminer = this.data.handIndex == 0 ? false : true
     if (submitName == '') { //检测输入是否合法
       wx.showToast({
         title: '请输入真实姓名',

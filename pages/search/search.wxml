@@ -1,22 +1,36 @@
-<text>\r\n</text>
-
-<view class="btns">
-    <view>
-    <button type = "primary" bindtap = "screening" style="position:fixed; top:0;width:750rpx;">
-        筛选
-    </button>
-    </view>
-
-<text>\r\n</text>
-
-    <view>
-    <button type = "primary" bindtap = "release" style="position:fixed;width:750rpx;">
-        发布
-    </button>
-    </view>
+<view class="tabTit box">
+  <view class="flex1{{!tab[index]?' active':''}}" wx:for="{{tabTxt}}" wx:key="type" data-index="{{index}}" bindtap="filterTab">
+    <text>{{item}}</text>
+  </view>
 </view>
 
-<text>\r\n</text>
+<view class="tabLayer" hidden="{{tab[0]}}">
+    <text class="{{gender_id==0?'active':''}}" data-id="0" data-index="0" data-txt="性别" bindtap="filter">不限</text>
+    <text class="{{gender_id==1?'active':''}}" data-id="1" data-index="0" data-txt="男" bindtap="filter">男</text>
+    <text class="{{gender_id==2?'active':''}}" data-id="2" data-index="0" data-txt="女" bindtap="filter">女</text>
+</view>
+<view class="tabLayer" hidden="{{tab[1]}}">
+    <text class="{{grade_id==0?'active':''}}" data-id="0" data-index="1" data-txt="年级" bindtap="filter">不限</text>
+    <text class="{{grade_id==1?'active':''}}" data-id="1" data-index="1" data-txt="大一" bindtap="filter">大一</text>
+    <text class="{{grade_id==2?'active':''}}" data-id="2" data-index="1" data-txt="大二" bindtap="filter">大二</text>
+    <text class="{{grade_id==3?'active':''}}" data-id="3" data-index="1" data-txt="大三" bindtap="filter">大三</text>
+    <text class="{{grade_id==4?'active':''}}" data-id="4" data-index="1" data-txt="大四" bindtap="filter">大四</text>
+    <text class="{{grade_id==5?'active':''}}" data-id="5" data-index="1" data-txt="硕士/博士" bindtap="filter">硕士/博士</text>
+</view>
+<view class="tabLayer" hidden="{{tab[2]}}">
+    <text class="{{price_id==0?'active':''}}" data-id="0" data-index="2" data-txt="酬劳" bindtap="filter">不限</text>
+    <text class="{{price_id==1?'active':''}}" data-id="1" data-index="2" data-txt="0-30元" bindtap="filter">0-30元</text>
+    <text class="{{price_id==2?'active':''}}" data-id="2" data-index="2" data-txt="31-60元" bindtap="filter">31-60元</text>
+    <text class="{{price_id==3?'active':''}}" data-id="3" data-index="2" data-txt="61-90元" bindtap="filter">61-90元</text>
+    <text class="{{price_id==4?'active':''}}" data-id="4" data-index="2" data-txt="90元以上" bindtap="filter">90元以上</text>
+</view>
+<view class="tabLayer" hidden="{{tab[3]}}">
+    <text class="{{time_id==0?'active':''}}" data-id="0" data-index="3" data-txt="时长" bindtap="filter">不限</text>
+    <text class="{{time_id==1?'active':''}}" data-id="1" data-index="3" data-txt="0-30分钟" bindtap="filter">0-30分钟</text>
+    <text class="{{time_id==2?'active':''}}" data-id="2" data-index="3" data-txt="31-60分钟" bindtap="filter">31-60分钟</text>
+    <text class="{{time_id==3?'active':''}}" data-id="3" data-index="3" data-txt="61-90分钟" bindtap="filter">61-90分钟</text>
+    <text class="{{time_id==4?'active':''}}" data-id="4" data-index="3" data-txt="90分钟以上" bindtap="filter">90分钟以上</text>
+</view>
 
 <view wx:for="{{arrys}}" wx:key="">
   <view class='item' bindtap='itemclick' data-item='{{item}}'>
@@ -30,69 +44,33 @@
 <view style="border-bottom:10rpx solid #BBBBBB">
     
 </view>
-  
-<view style="display:flex;flex-direction:column;">
-    <view style="margin-bottom:25rpx;padding:15rpx;border-bottom:10rpx solid #BBBBBB"
-    bindtap="toExp">
+
+<view class="cardlist">
+    <view class="topcard" bindtap="toExp">
         <view>
-            <text style="font-size:45rpx">实验名称1</text>
-              
+            <text style="font-size:45rpx">实验名称1</text>  
         </view>
-        <view style="margin-top:20rpx;margin-bottom:20rpx"> <text style="font-size:40rpx">实验时间</text></view>
-        <view style="display:flex;justify-content:space-between;"> <text style="font-size:40rpx">实验地点</text><text style="font-size:38rpx;color:#888888">实验money</text></view>
-          
+        <view style="margin-top:20rpx;margin-bottom:20rpx"> 
+            <text style="font-size:40rpx">实验时间</text>
+        </view>
+        <view style="display:flex;justify-content:space-between;"> 
+            <text style="font-size:40rpx">实验地点</text>
+            <text style="font-size:38rpx;color:#888888">实验money</text>
+        </view>    
     </view>
 
-    <view style="margin-bottom:25rpx;padding:15rpx;border-bottom:10rpx solid #BBBBBB">
+    <view class="card">
         <view>
             <text style="font-size:45rpx">实验名称2</text>
               
         </view>
         <view style="margin-top:20rpx;margin-bottom:20rpx"> <text style="font-size:40rpx">实验时间</text></view>
-        <view style="display:flex;justify-content:space-between;"> <text style="font-size:40rpx">实验地点</text><text style="font-size:38rpx;color:#888888">实验money</text></view>
-          
-    </view>
-
-    <view style="margin-bottom:25rpx;padding:15rpx;border-bottom:10rpx solid #BBBBBB">
-        <view>
-            <text style="font-size:45rpx">实验名称3</text>
-              
-        </view>
-        <view style="margin-top:20rpx;margin-bottom:20rpx"> <text style="font-size:40rpx">实验时间</text></view>
-        <view style="display:flex;justify-content:space-between;"> <text style="font-size:40rpx">实验地点</text><text style="font-size:38rpx;color:#888888">实验money</text></view>
-          
-    </view>
-
-    <view style="margin-bottom:25rpx;padding:15rpx;border-bottom:10rpx solid #BBBBBB">
-        <view>
-            <text style="font-size:45rpx">实验名称4</text>
-              
-        </view>
-        <view style="margin-top:20rpx;margin-bottom:20rpx"> <text style="font-size:40rpx">实验时间</text></view>
-        <view style="display:flex;justify-content:space-between;"> <text style="font-size:40rpx">实验地点</text><text style="font-size:38rpx;color:#888888">实验money</text></view>
-          
-    </view>
-
-    <view style="margin-bottom:25rpx;padding:15rpx;border-bottom:10rpx solid #BBBBBB">
-        <view>
-            <text style="font-size:45rpx">实验名称5</text>
-              
-        </view>
-        <view style="margin-top:20rpx;margin-bottom:20rpx"> <text style="font-size:40rpx">实验时间</text></view>
-        <view style="display:flex;justify-content:space-between;"> <text style="font-size:40rpx">实验地点</text><text style="font-size:38rpx;color:#888888">实验money</text></view>
-          
-    </view>
-
-    <view style="margin-bottom:25rpx;padding:15rpx;border-bottom:10rpx solid #BBBBBB">
-        <view>
-            <text style="font-size:45rpx">实验名称6</text>
-              
-        </view>
-        <view style="margin-top:20rpx;margin-bottom:20rpx"> <text style="font-size:40rpx">实验时间</text></view>
-        <view style="display:flex;justify-content:space-between;"> <text style="font-size:40rpx">实验地点</text><text style="font-size:38rpx;color:#888888">实验money</text></view>
-          
+        <view style="display:flex;justify-content:space-between;"> 
+            <text style="font-size:40rpx">实验地点</text>
+            <text style="font-size:38rpx;color:#888888">实验money</text>
+        </view>  
     </view>
     
-      
 </view>
+
   
