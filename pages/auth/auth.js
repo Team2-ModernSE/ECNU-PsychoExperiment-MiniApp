@@ -78,7 +78,7 @@ Page({
       console.log("用户的信息如下：");
       console.log(res.detail.userInfo);
       //授权成功后,通过改变 isHide 的值，让实现页面显示出来，把授权页面隐藏起来
-      db.collection('examinee').where({
+      db.collection('user').where({
         _openid: app.globalData.openid
       })
       .get({
