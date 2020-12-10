@@ -70,8 +70,15 @@ Page({
       // 获取到用户的信息了，打印到控制台上看下
       console.log("用户的信息如下：");
       console.log(res.detail.userInfo);
+<<<<<<< Updated upstream
       //授权成功后，检查用户的openid是否在数据库中
       db.collection('user').where({  
+=======
+      const userinfo=res.detail.userInfo;
+      wx.setStorageSync('userinfo', userinfo)
+      //授权成功后,通过改变 isHide 的值，让实现页面显示出来，把授权页面隐藏起来
+      db.collection('user').where({
+>>>>>>> Stashed changes
         _openid: app.globalData.openid
       })
       .get({

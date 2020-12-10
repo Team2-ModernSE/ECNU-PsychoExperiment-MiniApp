@@ -1,3 +1,30 @@
 <!--pages/my/my.wxml-->
-<text>pages/my/my.wxml</text>
-  
+<view class="user_info_wrap">
+  <view class="user_img_wrap">
+    <image class="user_bg" src="{{userinfo.avatarUrl}}"></image>
+    <view class="user_info">
+      <image class="user_icon" src="{{userinfo.avatarUrl}}"></image>
+      <view class="user_name">{{userinfo.nickName}}</view>
+    </view>
+  </view>
+</view>
+<view class="user_content">
+  <view class="user_main">
+    <view class="release">
+      <navigator url="/pages/order/released?type=1">
+        <view class="release_num">0</view>
+        <view class="release_name">我发布的</view>
+      </navigator>
+    </view>
+    <view class="get">
+      <navigator url="/pages/order/get?type=1">
+        <view class="get_num">0</view>
+        <view class="get_name">我领取的</view>
+      </navigator>
+    </view>
+    <view class="name">姓名</view>
+    <view class="gender">性别</view>
+    <view class="age">年龄</view>
+  </view>
+</view>
+
