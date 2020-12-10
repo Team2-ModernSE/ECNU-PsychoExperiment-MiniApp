@@ -37,16 +37,12 @@ Page({
               .get({
                 success: function(res){
                   console.log(res)
-<<<<<<< Updated upstream
                   if(!res.data.length){  //openid不在数据库中
-=======
-                  /*if(!res.data.length){
->>>>>>> Stashed changes
                     console.log('fail')
                     wx.redirectTo({  //跳转到注册页面
                       url: '../../pages/register/register',
                     })
-                  }*/
+                  }
                 }
               })
             }

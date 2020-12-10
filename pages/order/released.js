@@ -5,23 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabs:[
-    {
-      id:0,
-      value:"待领取的",
-      isActive: ture
-    },
-    {
-      id:1,
-      value:"进行中",
-      isActive: ture
-    },
-    {
-      id:2,
-      value:"已完成",
-      isActive: ture
-    }
-    ]
+
+
 
   },
 
