@@ -1,12 +1,10 @@
 const app = getApp()
 Page({
   data: {
-    tabTxt: ['性别', '年级', '酬劳','时长'],
-    tab: [true, true, true,true],
+    tabTxt: ['性别','酬劳','时长'],
+    tab: [true,true,true],
     gender_id: 0,
     gender_txt: '',
-    grade_id: 0,
-    grade_txt: '',
     price_id: 0,
     price_txt: '',
     time_id: 0,
@@ -21,14 +19,9 @@ Page({
       url: "../../pages/release/release"
     })
   },
-  screening: function () {
-    wx.navigateTo({
-      url: "../../pages/screening/screening"
-    })
-  },
   toExp: function () {
     wx.navigateTo({
-      url: "../../pages/exp1/exp1"
+      url: "../../pages/expInfo1/expInfo1?id=0bcbdde05fd2fe0b011bbb1b1db2ed9b"
     })
   },
   //刷新
@@ -58,7 +51,7 @@ Page({
     })
   },
   filterTab: function (e) {
-    var data = [true, true, true, true],
+    var data = [true, true, true],
     index = e.currentTarget.dataset.index;
     data[index] = !this.data.tab[index];
     this.setData({
@@ -76,7 +69,7 @@ Page({
       case '0':
         tabTxt[0] = txt;
         self.setData({
-          tab: [true, true, true, true],
+          tab: [true, true, true],
           tabTxt: tabTxt,
           gender_id: id,
           gender_txt: txt
@@ -85,25 +78,16 @@ Page({
       case '1':
         tabTxt[1] = txt;
         self.setData({
-          tab: [true, true, true, true],
-          tabTxt: tabTxt,
-          grade_id: id,
-          grade_txt: txt
-        });
-        break;
-      case '2':
-        tabTxt[2] = txt;
-        self.setData({
-          tab: [true, true, true, true],
+          tab: [true, true, true],
           tabTxt: tabTxt,
           price_id: id,
           price_txt: txt
         });
         break;
-      case '3':
-        tabTxt[3] = txt;
+      case '2':
+        tabTxt[2] = txt;
         self.setData({
-          tab: [true, true, true, true],
+          tab: [true, true, true],
           tabTxt: tabTxt,
           time_id: id,
           time_txt: txt
@@ -130,13 +114,13 @@ Page({
     //var time_max;
     var sex_tag;
     if(this.data.gender_id==='0'){
-      sex_tag = 'unknown';
+      sex_tag = '不限';
     }
     else if(this.data.gender_id==='1'){
-      sex_tag = 'male';
+      sex_tag = '男';
     }
     else if(this.data.gender_id==='2'){
-      sex_tag = 'female';
+      sex_tag = '女';
     }
     else
     //价钱的上下限，从id转换

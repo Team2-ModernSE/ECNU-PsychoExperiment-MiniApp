@@ -5,21 +5,13 @@
     <input class='mainListInput' placeholder='输入您的真实姓名' bindinput='nameInput'></input>
   </view>
   <view class="mainListContainer">
-    <view class="mainListText">年级</view>
-    <picker bindchange="bindGradeChange" class="mainListPicker" value="{{gradeIndex}}" range="{{gradeArray}}">
-      {{gradeArray[gradeIndex]}}
-    </picker>
+    <view class="mainListText">学号</view>
+    <input class='mainListInput' placeholder='输入您的学号' bindinput='stuNumberInput'></input>
   </view>
   <view class="mainListContainer">
-    <view class="mainListText">左右利手</view>
-    <picker bindchange="bindHandChange" class="mainListPicker" value="{{handIndex}}" range="{{handArray}}">
-      {{handArray[handIndex]}}
-    </picker>
-  </view>
-  <view class="mainListContainer">
-    <view class="mainListText">是否主试</view>
-    <picker bindchange="bindExaminerChange" class="mainListPicker" value="{{examinerIndex}}" range="{{examinerArray}}">
-      {{examinerArray[examinerIndex]}}
+    <view class="mainListText">性别</view>
+    <picker bindchange="bindGenderChange" class="mainListPicker" value="{{genderIndex}}" range="{{genderArray}}">
+      {{genderArray[genderIndex]}}
     </picker>
   </view>
 </view>

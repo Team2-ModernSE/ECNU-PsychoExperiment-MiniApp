@@ -1,2 +1,29 @@
-<!--pages/home/home.wxml-->
-<text>pages/home/home.wxml</text>
+<swiper indicator-dots="{{indicatorDots}}"
+  autoplay="true" interval="{{interval}}" duration="{{duration}}"
+  indicator-dots="true" circular="true">
+
+  <block wx:for="{{imgUrls}}">
+    <swiper-item>
+      <image src="{{item}}" class="slide-image" width="355" height="150"/>
+    </swiper-item>
+  </block>
+</swiper>
+
+<view>
+  <button type="primary"class="img-button" plain bindtap ='redirect1'>
+    <image class='btnImg' src='/icon/homepage_a.jpg'></image>
+    <view>领取实验</view>
+  </button>
+  <button type="primary"class="img-button" plain bindtap ='redirect2'>
+    <image class='btnImg' src='/icon/homepage_b.jpg'></image>
+    <view>个人中心</view>
+  </button>
+  <button type="primary"class="img-button" plain bindtap ='redirect3'>
+    <image class='btnImg' src='/icon/homepage_c.jpg'></image>
+    <view>我的订单</view>
+  </button>
+  <button type="primary"class="img-button" plain bindtap ='redirect4'>
+    <image class='btnImg' src='/icon/homepage_d.jpg'></image>
+    <view>我的发布</view>
+  </button>
+</view>

@@ -1,110 +1,196 @@
 // pages/release/release.js
-let f = length => Array.from({length}).map((v,k) => k);
+const db = wx.cloud.database()
+const _ = db.command
+const app = getApp()
+var currentCreatedExp = null
+
 Page({
   data: {
-    name:"",
-    sex:['不限','男','女'],
-    index_sex:0,
-    grade:['不限','16级','17级','18级','19级','20级'],
-    index_grade:0,
-    age:['不限','0-16岁','17-18岁','19-20岁','20-24岁','24岁以上'],
-    index_age:0,
-    date:'0000-00-00',
-    time:"00:00",
-    address:"",
-    duration:f(300),
-    index_dur:0,
-    money:f(200),
-    index_mon:0,
-    type_array:[["线上","线下"],["问卷"]],
-    type_index:[0,0],
-    contact:"",
-    others:""
+    name: "",
+    sex: ['不限', '男', '女'],
+    index_sex: 0,
+    date: '0000-00-00',
+    time: "00:00",
+    address: "",
+    duration: 0,
+    money: 0,
+    contact: "",
+    others: ""
   },
-  nameInput(e){
-    this.setData({
-      name:e.detail.value
-    })
-  },
-  changeSex(e){
-    this.setData({
-      index_sex:e.detail.value
-    })
-  },
-  changeGrade(e){
-    this.setData({
-      index_grade:e.detail.value
-    })
-  },
-  changeAge(e){
-    this.setData({
-      index_age:e.detail.value
-    })
-  },
-  timeChange(e){
-    this.setData({
-      time:e.detail.value
-    })
-  },
-  dateChange(e){
-    this.setData({
-      date:e.detail.value
-    })
-  },
-  durationChange(e){
-    this.setData({
-      index_dur:e.detail.value
-    })
-  },
-  addressInput(e){
-    this.setData({
-      address:e.detail.value
-    })
-  },
-  moneyChange(e){
-    this.setData({
-      index_mon:e.detail.value
-    })
-  },
-  typeChange(e){
-    this.setData({
-      type_index: e.detail.value
-    })
-  },
-  typeColumnChange(e){
-    var data = {
-      type_array: this.data.type_array,
-      type_index: this.data.type_index
-    };
-    data.type_index[e.detail.column] = e.detail.value;
-    switch (e.detail.column) {
-      case 0:
-        switch (data.type_index[0]) {
-          case 0:
-            data.type_array[1]=["问卷"];
-            break;
-          case 1:
-            data.type_array[1]=["需要配戴脑电仪器","无需配戴脑电仪器"];
-            break;
+  onLoad: function () {
+    db.collection('user').where({
+        _openid: app.globalData.openid
+      })
+      .get({
+        success: function (res) {
+          if (!res.data[0].isExaminer) {
+            wx.showModal({
+              title: '警告',
+              content: '您暂无权限，请联系管理员',
+              showCancel: false,
+              confirmText: '返回',
+              success: function (res) {
+                if (res.confirm) {
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                }
+              }
+            });
+          }
         }
-        data.type_index[1] = 0;
-        break;
-    }
-    this.setData(data)
+      })
   },
-  contactInput(e){
+  nameInput(e) {
+    this.setData({
+      name: e.detail.value
+    })
+  },
+  changeSex(e) {
+    this.setData({
+      index_sex: e.detail.value
+    })
+  },
+  timeChange(e) {
+    this.setData({
+      time: e.detail.value
+    })
+  },
+  dateChange(e) {
+    this.setData({
+      date: e.detail.value
+    })
+  },
+  durationInput(e) {
+    this.setData({
+      duration: e.detail.value
+    })
+  },
+  addressInput(e) {
+    this.setData({
+      address: e.detail.value
+    })
+  },
+  moneyInput(e) {
+    this.setData({
+      money: e.detail.value
+    })
+  },
+  contactInput(e) {
     this.setData({
       contact: e.detail.value
     })
   },
-  othersInput(e){
+  othersInput(e) {
     this.setData({
       others: e.detail.value
     })
   },
-  return:function(){
+  return: function () {
     wx.navigateBack({
-      delta:1
+      delta: 1
     })
+  },
+  submitTap: function () {
+    var submitName = this.data.name;
+    var submitGender = this.data.sex[this.data.index_sex];
+    var submitDate = new Date(this.data.date + ' ' + this.data.time + ':00')
+    var submitDuration = parseInt(this.data.duration)
+    var submitLocation = this.data.address;
+    var submitMoney = parseInt(this.data.money);
+    var submitContact = this.data.contact;
+    var submitOthers = this.data.others;
+
+    if (submitName == "") {
+      wx.showToast({
+        title: '请输入合法的实验名称',
+        icon: 'none',
+        duration: 2000,
+        mask: true
+      });
+    } else if (submitDate < new Date() || submitDate.toDateString() == "Invalid Date") {
+      wx.showToast({
+        title: '请输入合法的日期和时间',
+        icon: 'none',
+        duration: 2000,
+        mask: true
+      });
+    } else if (submitDuration.toString() == "NaN" || submitDuration == null) {
+      wx.showToast({
+        title: '请输入合法的实验时长',
+        icon: 'none',
+        duration: 2000,
+        mask: true
+      });
+    } else if (submitLocation == "") {
+      wx.showToast({
+        title: '请输入合法的实验地点',
+        icon: 'none',
+        duration: 2000,
+        mask: true
+      });
+    } else if (submitMoney.toString() == "NaN" || submitMoney == null) {
+      wx.showToast({
+        title: '请输入合法的实验酬劳',
+        icon: 'none',
+        duration: 2000,
+        mask: true
+      });
+    } else if (submitContact == "") {
+      wx.showToast({
+        title: '请输入合法的联系方式',
+        icon: 'none',
+        duration: 2000,
+        mask: true
+      });
+    } else {
+      db.collection('experiment').add({
+        data: {
+          name: submitName,
+          sex: submitGender,
+          date: submitDate,
+          time: submitDuration,
+          location: submitLocation,
+          money: submitMoney,
+          contact: submitContact,
+          others: submitOthers,
+          examinerId: app.globalData.openid,
+          examineeInfo: [],
+          examineeId: [],
+          isActive: true
+        },
+        success: function (res) {
+          db.collection('user').where({
+              _openid: app.globalData.openid
+            })
+            .update({
+              data: {
+                createdExp: _.push(res._id)
+              }
+            })
+          wx.showModal({ //弹出提示框
+            title: '提示',
+            content: '实验创建成功',
+            showCancel: false,
+            confirmText: '返回',
+            success: function (res) {
+              if (res.confirm) {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }
+            }
+          });
+        },
+        fail: function () { //插入失败，弹出提示框
+          wx.showModal({
+            title: '注意',
+            content: '提交失败，请重试',
+            showCancel: false,
+            confirmText: '重试'
+          })
+        }
+      })
+    }
   }
 })

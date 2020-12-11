@@ -1,103 +1,54 @@
-<view class="view1" >实验名称:
-    <input class="input" placeholder="请输入实验名称"
-    bindinput="nameInput"/>
+<view class="mainContainer">
+  <view class="mainListContainer">
+    <view class="mainListText">实验名称</view>
+    <input class='mainListInput' placeholder='输入实验名称' bindinput='nameInput'></input>
   </view>
-<text>\r\n</text>
-  
-<view class="view1">
-    性别要求:
-    <picker bindchange="changeSex" range="{{sex}}" value="{{index_sex}}">
-        <view>
-            {{sex[index_sex]}}
-        </view>
-    </picker>  
-</view>
-<text>\r\n</text>
-<view class="view1">
-    年级要求:
-    <picker bindchange="changeGrade" range="{{grade}}" value="{{index_grade}}">
-        <view>
-            {{grade[index_grade]}}
-        </view>
-    </picker>  
-</view>
-<text>\r\n</text>
-<view class="view1">
-    年龄要求:
-    <picker bindchange="changeAge" range="{{age}}" value="{{index_age}}">
-        <view>
-            {{age[index_age]}}
-        </view>
-    </picker>  
-</view>
 
-<text>\r\n</text>
+  <view class="mainListContainer">
+    <view class="mainListText">性别要求</view>
+    <picker bindchange="changeSex" class="mainListPicker" value="{{index_sex}}" range="{{sex}}">
+      {{sex[index_sex]}}
+    </picker>
+  </view>
 
-<view class="view1">
-  <view class="section__title">实验日期:</view>
-  <picker mode="date" value="{{date}}" start="2020-12-7" end="2021-12-7" bindchange="dateChange">
-    <view class="picker">
+  <view class="mainListContainer">
+    <view class="mainListText">实验日期</view>
+    <picker class="mainListPicker" mode="date" value="{{date}}" start="2020-12-7" end="2021-12-7"
+      bindchange="dateChange">
       {{date}}
-    </view>
-  </picker>
-</view>
+    </picker>
+  </view>
 
-<text>\r\n</text>
-<view class="view1">
-  <view class="section__title">实验时间:</view>
-  <picker mode="time" value="{{time}}" start="00:00" end="23:59" bindchange="timeChange">
-    <view class="picker">
-        {{time}}
-    </view>
-  </picker>
-</view>
-<text>\r\n</text>
-<view class="view1">
-    实验时长:
-    <picker bindchange="durationChange" range="{{duration}}" value="{{index_dur}}">
-        <view>
-            {{duration[index_dur]}}{{"min"}}
-        </view>
-    </picker>  
-</view>
-<text>\r\n</text>
-<view class="view1" >实验地点:
-    <input class="input" placeholder="请输入实验地点"
-    bindinput="addressInput"/>
+  <view class="mainListContainer">
+    <view class="mainListText">实验时间</view>
+    <picker class="mainListPicker" mode="time" value="{{time}}" start="00:00" end="23:59" bindchange="timeChange">
+      {{time}}
+    </picker>
   </view>
-<text>\r\n</text>
-  
-<view class="view1">
-    酬劳:
-    <picker bindchange="moneyChange" range="{{money}}" value="{{index_mon}}">
-        <view>
-            {{money[index_mon]}}{{"元"}}
-        </view>
-    </picker>  
-</view>
-<text>\r\n</text>
-<view class="view1">
-  <view class="section__title">实验类型: </view>
-  <picker mode="multiSelector" bindchange="typeChange" bindcolumnchange="typeColumnChange" value="{{type_index}}" range="{{type_array}}">
-    <view class="picker">
-      {{type_array[0][type_index[0]]}},{{type_array[1][type_index[1]]}}
-    </view>
-  </picker>
-</view>
-<text>\r\n</text>
-<view class="view1" >联系方式:
-    <input class="input" placeholder="请输入联系方式"
-    bindinput="contactInput"/>
+
+  <view class="mainListContainer">
+    <view class="mainListText">实验时长</view>
+    <input class='mainListInput' bindinput="durationInput" placeholder='输入实验时长（以分钟计）'></input>
   </view>
-<text>\r\n</text>
-<view class="view1" >备注:
-    <input class="input" placeholder="请输入详细实验信息"
-    bindinput="othersInput"/>
+
+  <view class="mainListContainer">
+    <view class="mainListText">实验地点</view>
+    <input class='mainListInput' placeholder="请输入实验地点" bindinput="addressInput"></input>
   </view>
-<text>\r\n</text>
-<text>\r\n</text>
-<text>\r\n</text>
-<text>\r\n</text>
-<button type = "primary" bindtap = "return">
-    确认
-</button>
+
+  <view class="mainListContainer">
+    <view class="mainListText">实验酬劳</view>
+    <input class='mainListInput' placeholder="请输入实验酬劳" bindinput="moneyInput"></input>
+  </view>
+
+  <view class="mainListTextareaContainer">
+    <view class="mainListText">联系方式</view>
+    <textarea class='mainListTextarea' placeholder="请输入联系方式" bindinput="contactInput"></textarea>
+  </view>
+
+  <view class="mainListTextareaContainer">
+    <view class="mainListText">备注</view>
+    <textarea class='mainListTextarea' placeholder="请输入详细实验信息" bindinput="othersInput"></textarea>
+  </view>
+</view>
+<view class='nextButton' bindtap='submitTap'>提交</view>

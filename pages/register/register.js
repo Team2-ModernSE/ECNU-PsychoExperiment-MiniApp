@@ -8,13 +8,10 @@ Page({
    * 页面的初始数据
    */
   data: { //初始化数据
-    gradeArray: ['大一', '大二', '大三', '大四', '硕士研究生/博士研究生'],
-    gradeIndex: 0,
-    handArray: ['右利手', '左利手'],
-    handIndex: 0,
-    examinerArray: ['否', '是'],
-    examinerIndex: 0,
+    genderArray: ['男', '女'],
+    genderIndex: 0,
     name: '',
+    stuNumber: '',
   },
 
   /**
@@ -79,32 +76,32 @@ Page({
     })
   },
 
-  bindGradeChange: function (e) { //监听年级选择
+  stuNumberInput: function (e) {
     this.setData({
-      gradeIndex: e.detail.value
+      stuNumber: e.detail.value
     })
   },
 
-  bindHandChange: function (e) { //监听左右利手选择
+  bindGenderChange: function (e) { //监听年级选择
     this.setData({
-      handIndex: e.detail.value
-    })
-  },
-
-  bindExaminerChange: function (e) { //监听身份选择
-    this.setData({
-      examinerIndex: e.detail.value
+      genderIndex: e.detail.value
     })
   },
 
   submitTap: function () {
     var submitName = this.data.name;
-    var submitGrade = this.data.gradeArray[this.data.gradeIndex];
-    var submitHand = this.data.handArray[this.data.handIndex];
-    var submitIsExaminer = this.data.handIndex == 0 ? false : true
+    var submitStuNumber = this.data.stuNumber;
+    var submitGender = this.data.genderArray[this.data.genderIndex];
     if (submitName == '') { //检测输入是否合法
       wx.showToast({
         title: '请输入真实姓名',
+        icon: 'none',
+        duration: 2000,
+        mask: true
+      });
+    } else if (submitStuNumber == "") {
+      wx.showToast({
+        title: '请输入学号',
         icon: 'none',
         duration: 2000,
         mask: true
@@ -113,9 +110,11 @@ Page({
       db.collection('user').add({ //向数据库中插入数据
         data: {
           name: submitName,
-          grade: submitGrade,
-          hand: submitHand,
-          isExaminer: submitIsExaminer
+          stuNumber: submitStuNumber,
+          gender: submitGender,
+          isExaminer: false,
+          createdExp: [],
+          joinedExp: []
         },
         success: function (res) { //插入成功
           console.log(res)
