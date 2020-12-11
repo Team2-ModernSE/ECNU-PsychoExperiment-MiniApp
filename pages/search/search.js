@@ -19,14 +19,9 @@ Page({
       url: "../../pages/release/release"
     })
   },
-  screening: function () {
-    wx.navigateTo({
-      url: "../../pages/screening/screening"
-    })
-  },
   toExp: function () {
     wx.navigateTo({
-      url: "../../pages/expInfo1/expInfo1"
+      url: "../../pages/expInfo1/expInfo1?id=0bcbdde05fd2fe0b011bbb1b1db2ed9b"
     })
   },
   //刷新

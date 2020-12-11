@@ -155,7 +155,9 @@ Page({
           contact: submitContact,
           others: submitOthers,
           examinerId: app.globalData.openid,
+          examineeInfo: [],
           examineeId: [],
+          isActive: true
         },
         success: function (res) {
           db.collection('user').where({

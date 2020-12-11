@@ -10,8 +10,6 @@ Page({
   data: { //初始化数据
     genderArray: ['男', '女'],
     genderIndex: 0,
-    examinerArray: ['否', '是'],
-    examinerIndex: 0,
     name: '',
     stuNumber: '',
   },
@@ -90,17 +88,10 @@ Page({
     })
   },
 
-  bindExaminerChange: function (e) { //监听身份选择
-    this.setData({
-      examinerIndex: e.detail.value
-    })
-  },
-
   submitTap: function () {
     var submitName = this.data.name;
     var submitStuNumber = this.data.stuNumber;
     var submitGender = this.data.genderArray[this.data.genderIndex];
-    var submitIsExaminer = this.data.handIndex == 0 ? false : true
     if (submitName == '') { //检测输入是否合法
       wx.showToast({
         title: '请输入真实姓名',
@@ -121,7 +112,7 @@ Page({
           name: submitName,
           stuNumber: submitStuNumber,
           gender: submitGender,
-          isExaminer: submitIsExaminer,
+          isExaminer: false,
           createdExp: [],
           joinedExp: []
         },

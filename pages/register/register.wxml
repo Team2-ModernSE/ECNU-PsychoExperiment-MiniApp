@@ -14,11 +14,5 @@
       {{genderArray[genderIndex]}}
     </picker>
   </view>
-  <view class="mainListContainer">
-    <view class="mainListText">是否主试</view>
-    <picker bindchange="bindExaminerChange" class="mainListPicker" value="{{examinerIndex}}" range="{{examinerArray}}">
-      {{examinerArray[examinerIndex]}}
-    </picker>
-  </view>
 </view>
 <view class='nextButton' bindtap='submitTap'>提交</view>
