@@ -117,7 +117,6 @@ Page({
           joinedExp: []
         },
         success: function (res) { //插入成功
-          console.log(res)
           wx.showModal({ //弹出提示框
             title: '提示',
             content: '个人信息完善成功',

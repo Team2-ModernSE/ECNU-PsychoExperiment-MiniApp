@@ -183,7 +183,7 @@ Page({
       .get({
         success: function(res) {
           // res.data 是包含以上定义的两条记录的数组
-          console.log(res.data)
+          
         }
       })
     }
