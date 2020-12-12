@@ -24,7 +24,6 @@ Page({
     wx.getStorage({
       key: 'examineeInfo',
       success: res=>{
-        console.log(res.data)
         this.setData({
           id: res.data._id,
           name: res.data.examineeName,

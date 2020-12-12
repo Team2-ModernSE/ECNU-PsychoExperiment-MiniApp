@@ -67,18 +67,13 @@ Page({
   },
   bindGetUserInfo: function (res) {
     if (res.detail.userInfo) {
-      // 获取到用户的信息了，打印到控制台上看下
-      console.log("用户的信息如下：");
-      console.log(res.detail.userInfo);
       //授权成功后，检查用户的openid是否在数据库中
       db.collection('user').where({  
         _openid: app.globalData.openid
       })
       .get({
         success: function(res){
-          console.log(res)
           if(!res.data.length){  //如果没有找到数据，则跳转到注册页面
-            console.log('fail')
             wx.redirectTo({
               url: '../../pages/register/register',
             })

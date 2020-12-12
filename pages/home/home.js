@@ -28,25 +28,20 @@ Page({
       data: {},
       success: res => {
         app.globalData.openid = res.result.openid
-        console.log(app.globalData.openid)
       }
     })
     wx.getSetting({
       success: function (res) {
-        console.log(res.authSetting['scope.userInfo']) //检测是否授权
         if (res.authSetting['scope.userInfo']) { //如果已经授权
           wx.getUserInfo({
             success: res => {
-              console.log(res.userInfo)
               app.globalData.userInfo = res.userInfo;
               db.collection('user').where({ //检测用户的openid是否在数据库中
                   _openid: app.globalData.openid
                 })
                 .get({
                   success: function (res) {
-                    console.log(res)
                     if (!res.data.length) { //openid不在数据库中
-                      console.log('fail')
                       wx.redirectTo({ //跳转到注册页面
                         url: '../../pages/register/register',
                       })
@@ -58,7 +53,6 @@ Page({
             }
           })
         } else { //未授权，跳转到授权页面
-          console.log('fail')
           wx.redirectTo({
             url: '../../pages/auth/auth',
           })

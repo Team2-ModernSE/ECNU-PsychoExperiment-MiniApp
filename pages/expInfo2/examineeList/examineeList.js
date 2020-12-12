@@ -38,7 +38,6 @@ Page({
     })
     .get({
       success: res=>{
-        console.log(res.data)
         this.setData({
           detailList: res.data,
         })
