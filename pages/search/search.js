@@ -21,7 +21,7 @@ Page({
   },
   toExp: function () {
     wx.navigateTo({
-      url: "../../pages/expInfo1/expInfo1?id=0bcbdde05fd2fe0b011bbb1b1db2ed9b"
+      url: "../../pages/expInfo1/expInfo1?id=0a4429175fd4cf5a0153bdc26c4a14bc"
     })
   },
   //刷新

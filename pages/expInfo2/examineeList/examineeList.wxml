@@ -1,0 +1,13 @@
+<!--pages/expInfo2/examineeList/examineeList.wxml-->
+<block wx:for="{{detailList}}" wx:key="index">
+  <view class="card" id="{{index}}" bindtap="cardTap">
+    <view class="textframe">
+      <view class="statusframe">
+        <text>{{item.examineeName}}</text>
+        <text>{{statusList[item.isAccepted]}}</text>
+      </view>
+      <text class="minitext">{{item.examineeGender}}</text>
+      <text class="minitext">学号：{{item.examineeStuNumber}}</text>
+    </view>
+  </view>
+</block>

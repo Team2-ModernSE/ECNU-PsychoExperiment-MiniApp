@@ -22,7 +22,7 @@
     <image class='btnImg' src='/icon/homepage_c.jpg'></image>
     <view>我的订单</view>
   </button>
-  <button type="primary"class="img-button" plain bindtap ='redirect4'>
+  <button type="primary" class="img-button" plain bindtap ='redirect4'>
     <image class='btnImg' src='/icon/homepage_d.jpg'></image>
     <view>我的发布</view>
   </button>
