@@ -50,6 +50,8 @@ Page({
                       wx.redirectTo({ //跳转到注册页面
                         url: '../../pages/register/register',
                       })
+                    } else {
+                      app.globalData.userDetail = res.data[0]
                     }
                   }
                 })
@@ -75,7 +77,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (app.globalData.userDetail == null) {
+      db.collection('user').where({ //检测用户的openid是否在数据库中
+          _openid: app.globalData.openid
+        })
+        .get({
+          success: function (res) {
+            app.globalData.userDetail = res.data[0]
+          }
+        })
+    }
   },
 
   /**
@@ -145,10 +156,12 @@ Page({
   },
   redirect3: function () {
     wx.navigateTo({
-      url: '../../pages/release/release',
+      url: '../../pages/order/get',
     })
   },
   redirect4: function () {
-
+    wx.navigateTo({
+      url: '../../pages/order/released',
+    })
   }
 })

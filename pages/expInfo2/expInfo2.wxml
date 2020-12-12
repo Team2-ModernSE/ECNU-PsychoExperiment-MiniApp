@@ -1,0 +1,60 @@
+<!--pages/expInfo2/expInfo2.wxml-->
+<view class="mainContainer">
+  <view class="mainListContainer">
+    <view class="mainListText">实验名称</view>
+    <text class='mainListInput'>{{name}}</text>
+  </view>
+
+  <view class="mainListContainer">
+    <view class="mainListText">性别要求</view>
+    <text class='mainListInput'>{{gender}}</text>
+  </view>
+
+  <view class="mainListContainer">
+    <view class="mainListText">实验日期</view>
+    <text class='mainListInput'>{{date}}</text>
+  </view>
+
+  <view class="mainListContainer">
+    <view class="mainListText">实验时间</view>
+    <text class='mainListInput'>{{time}}</text>
+  </view>
+
+  <view class="mainListContainer">
+    <view class="mainListText">实验时长</view>
+    <text class='mainListInput'>{{duration}}</text>
+  </view>
+
+  <view class="mainListContainer">
+    <view class="mainListText">实验地点</view>
+    <text class='mainListInput'>{{location}}</text>
+  </view>
+
+  <view class="mainListContainer">
+    <view class="mainListText">实验酬劳</view>
+    <text class='mainListInput'>{{money}}</text>
+  </view>
+
+  <view class="mainListTextareaContainer">
+    <view class="mainListText">主试联系方式</view>
+    <textarea class='mainListTextarea' disabled="true" value="{{contact}}"></textarea>
+  </view>
+
+  <view class="mainListTextareaContainer">
+    <view class="mainListText">主试备注</view>
+    <textarea class='mainListTextarea' disabled='true' value="{{others}}"></textarea>
+  </view>
+
+  <view class="mainListContainer">
+    <view class="mainListText">实验状态</view>
+    <picker bindchange="bindStatusChange" class="mainListPicker" value="{{statusIndex}}" range="{{statusArray}}">
+      {{statusArray[statusIndex]}}
+    </picker>
+  </view>
+</view>
+<view class="navigator-frame">
+  <navigator class="navigator-text" url="examineeList/examineeList?id={{id}}">
+    <text>查看被试信息</text>
+  </navigator>
+</view>
+<view class='nextButton' bindtap='submitTap'>更改</view>

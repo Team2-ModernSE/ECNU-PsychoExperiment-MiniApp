@@ -17,18 +17,27 @@ Page({
     contact: '',
     others: '',
     examineeContact: "",
-    examineeOthers: ''
+    examineeOthers: '',
+    examineeName: '',
+    examineeGender: '',
+    examineeStuNumber: '',
+    examinerId: ''
+  },
+  onLaunch: function(){
+    
   },
   onLoad: function (options) {
     this.setData({
-      id: options.id
+      id: options.id,
+      examineeName: app.globalData.userDetail.name,
+      examineeGender: app.globalData.userDetail.gender,
+      examineeStuNumber: app.globalData.userDetail.stuNumber,
     })
     db.collection('experiment').where({
         _id: this.data.id
       })
       .get({
         success: res => {
-          console.log
           this.setData({
             name: res.data[0].name,
             gender: res.data[0].sex,
@@ -39,12 +48,13 @@ Page({
             money: res.data[0].money + "元",
             contact: res.data[0].contact,
             others: res.data[0].others,
+            examinerId: res.data[0].examinerId
           })
         }
       })
   },
   onShow: function () {
-
+    
   },
   examineeContactInput: function(e){
     this.setData({
@@ -66,19 +76,18 @@ Page({
       });
     }
     else{
-      var submitData={
-        openid: app.globalData.openid,
-        isAccepted: 0,
-        contact: this.data.examineeContact,
-        others: this.data.examineeOthers
-      }
-      db.collection('experiment').where({
-        _id: this.data.id
-      })
-      .update({
+      db.collection('order').add({
         data:{
-          examineeInfo: _.push(submitData),
-          examineeId: _.push(app.globalData.openid)
+          expId: this.data.id,
+          expName: this.data.name,
+          examineeId: app.globalData.openid,
+          isAccepted: 0,
+          contact: this.data.examineeContact,
+          others: this.data.examineeOthers,
+          examineeName: this.data.examineeName,
+          examineeGender: this.data.examineeGender,
+          examineeStuNumber: this.data.examineeStuNumber,
+          examinerId: this.data.examinerId
         }
       })
       db.collection('user').where({

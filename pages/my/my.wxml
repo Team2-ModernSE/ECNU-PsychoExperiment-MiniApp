@@ -26,5 +26,10 @@
     <view class="gender">性别</view>
     <view class="age">年龄</view>
   </view>
+  <view>
+    <navigator url="../../pages/expInfo2/expInfo2?id=0a4429175fd4cf5a0153bdc26c4a14bc">ExpInfo2入口</navigator>
+    <navigator url="../../pages/expInfo3/expInfo3?id=0a4429175fd4cf5a0153bdc26c4a14bc">ExpInfo3入口</navigator>
+    <navigator url="../../pages/release/release">实验创建入口</navigator>
+  </view>
 </view>
 

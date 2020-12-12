@@ -1,0 +1,36 @@
+<!--pages/expInfo2/examineeList/examineeInfo/examineeInfo.wxml-->
+<!--pages/expInfo2/expInfo2.wxml-->
+<view class="mainContainer">
+  <view class="mainListContainer">
+    <view class="mainListText">姓名</view>
+    <text class='mainListInput'>{{name}}</text>
+  </view>
+
+  <view class="mainListContainer">
+    <view class="mainListText">性别</view>
+    <text class='mainListInput'>{{gender}}</text>
+  </view>
+
+  <view class="mainListContainer">
+    <view class="mainListText">学号</view>
+    <text class='mainListInput'>{{stuNumber}}</text>
+  </view>
+
+  <view class="mainListTextareaContainer">
+    <view class="mainListText">联系方式</view>
+    <textarea class='mainListTextarea' disabled="true" value="{{contact}}"></textarea>
+  </view>
+
+  <view class="mainListTextareaContainer">
+    <view class="mainListText">备注</view>
+    <textarea class='mainListTextarea' disabled='true' value="{{others}}"></textarea>
+  </view>
+
+  <view class="mainListContainer">
+    <view class="mainListText">处理意见</view>
+    <picker bindchange="bindStatusChange" class="mainListPicker" value="{{statusIndex}}" range="{{statusArray}}">
+      {{statusArray[statusIndex]}}
+    </picker>
+  </view>
+</view>
+<view class='nextButton' bindtap='submitTap'>提交</view>
