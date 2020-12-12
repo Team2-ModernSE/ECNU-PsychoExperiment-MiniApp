@@ -1,4 +1,5 @@
 <!--pages/my/my.wxml-->
+<!--头像和用户名称-->
 <view class="user_info_wrap">
   <view class="user_img_wrap">
     <image class="user_bg" src="{{userinfo.avatarUrl}}"></image>
@@ -8,61 +9,70 @@
     </view>
   </view>
 </view>
+<!--用户信息-->
 <view class="user_content">
   <view class="user_main">
-    <view class="release">
-      <navigator url="/pages/order/released">
-        <view class="release_name">我发布的</view>
-      </navigator>
+    <!--订单信息-->
+    <view class="order_wrap">
+      <view class="order_title">我的订单</view>
+      <view class="order_content">
+        <navigator url="/pages/order/released">
+          <view class="order_name">我发布的</view>
+        </navigator>
+        <navigator url="/pages/order/get?type=1">
+          <view class="order_name">我领取的</view>
+        </navigator>
+      </view>
     </view>
-    <view class="get">
-      <navigator url="/pages/order/get?type=1">
-        <view class="get_name">我领取的</view>
-      </navigator>
+    <!--个人信息-->
+    <view class="info_wrap">
+      <view class="info_title">我的信息</view>
+      <view class="info_content">
+        <view class="info_name">姓名：{{name}}</view>
+        <view class="info_name">性别:{{sex[index_sex]}}</view>
+        <view class="info_name">年级:{{grade[index_grade]}}</view>
+        <view class="info_name">年龄:{{age}}</view>
+      </view>
     </view>
-    <view class="name">姓名：{{name}}</view>
-    <view class="gender">性别:{{sex[index_sex]}}</view>
-    <view class="grade">年级:{{grade[index_grade]}}</view>
-    <view class="age">年龄:{{age}}</view>
   </view>
-  <button class="show-btn" bindtap="showDialogBtn">编辑</button>
-  <!--修改-->
-  <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
-  <view class="modal-dialog" wx:if="{{showModal}}">
-    <view class="modal-title">修改信息</view>
-    <view class="modal-content">
-      <view class="modal-input">
-        <input placeholder-class="input-holder" type="number" maxlength="10" bindinput="inputChange" class="input"
-          placeholder="姓名" bindinput="nameInput"></input>
+</view>
+<!--修改-->
+<button class="show-btn" bindtap="showDialogBtn">编辑</button>
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">修改信息</view>
+  <view class="modal-content">
+    <view class="modal-input">
+      <input placeholder-class="input-holder" maxlength="10" bindinput="inputChange" class="input" placeholder="姓名"
+        bindinput="nameInput"></input>
+    </view>
+    <view class="modal-input">
+      <view class="view1">
+        性别:
+        <picker bindchange="changeSex" range="{{sex}}" value="{{index_sex}}">
+          <view>
+            {{sex[index_sex]}}
+          </view>
+        </picker>
       </view>
-      <view class="modal-input">
-        <view class="view1">
-          性别:
-          <picker bindchange="changeSex" range="{{sex}}" value="{{index_sex}}">
-            <view>
-              {{sex[index_sex]}}
-            </view>
-          </picker>
-        </view>
+    </view>
+    <view class="modal-input">
+      <view class="view1">
+        年级:
+        <picker bindchange="changeGrade" range="{{grade}}" value="{{index_grade}}">
+          <view>
+            {{grade[index_grade]}}
+          </view>
+        </picker>
       </view>
-      <view class="modal-input">
-        <view class="view1">
-          年级:
-          <picker bindchange="changeGrade" range="{{grade}}" value="{{index_grade}}">
-            <view>
-              {{grade[index_grade]}}
-            </view>
-          </picker>
-        </view>
-      </view>
-      <view class="modal-input">
-        <input placeholder-class="input-holder"  maxlength="10" bindinput="inputChange" class="input"
-          placeholder="年龄" bindinput="ageInput"></input>
-      </view>
-      <view class="modal-footer">
-        <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
-        <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
-      </view>
+    </view>
+    <view class="modal-input">
+      <input placeholder-class="input-holder" type="number" maxlength="10" bindinput="inputChange" class="input"
+        placeholder="年龄" bindinput="ageInput"></input>
+    </view>
+    <view class="modal-footer">
+      <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+      <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
     </view>
   </view>
 </view>
