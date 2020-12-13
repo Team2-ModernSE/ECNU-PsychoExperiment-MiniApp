@@ -16,7 +16,7 @@ Page({
     indicatorDots: false,
     autoplay: false,
     interval: 5000,
-    duration: 1000
+    duration: 1000,
   },
 
   /**
@@ -60,7 +60,7 @@ Page({
         })
       }
     })
-    
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -156,8 +156,25 @@ Page({
     })
   },
   redirect4: function () {
-    wx.navigateTo({
-      url: '../../pages/order/released',
+    db.collection('user').where({
+      _openid: app.globalData.openid
+    })
+    .get({
+      success: res=>{
+        if(res.data[0].isExaminer){
+          wx.navigateTo({
+            url: '../../pages/order/released',
+          })
+        }
+        else{
+          wx.showToast({
+            title: '您暂无主试权限',
+            icon: 'none',
+            duration: 2000,
+            mask: true
+          });
+        }
+      }
     })
   }
 })

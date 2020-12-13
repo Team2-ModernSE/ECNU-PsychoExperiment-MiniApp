@@ -1,19 +1,37 @@
 // pages/my/my.js
 const app = getApp()
+const db = wx.cloud.database()
 Page({  
   data: {
     userinfo: null,
     name:"",
-    sex:['男','女'],
-    index_sex:0,
-    grade:['16级','17级','18级','19级','20级'],
-    index_grade:0,
-    age:0
+    sex:'',
+    stuNumber: "",
+    isExaminer: true,
   },
   onShow(){
-    const userInfo = app.globalData.userInfo 
-    this.setData({userinfo:userInfo}) 
+    wx.getUserInfo({
+      success: res=>{
+        this.setData({
+          userinfo: res.userInfo
+        })
+      }
+    })
+    db.collection('user').where({
+      _openid: app.globalData.openid
+    })
+    .get({
+      success: res=>{
+        this.setData({
+          name: res.data[0].name,
+          sex: res.data[0].gender,
+          stuNumber: res.data[0].stuNumber,
+          isExaminer: res.data[0].isExaminer
+        })
+      }
+    })
   },
+  /*
   showDialogBtn: function () {
     this.setData({
       showModal: true
@@ -22,11 +40,13 @@ Page({
   /**
   * 弹出框蒙层截断touchmove事件
   */
+ /*
   preventTouchMove: function () {
   },
   /** 
   * 隐藏模态对话框
   */
+  /*
   hideModal: function () {
   this.setData({
   showModal: false
@@ -35,12 +55,14 @@ Page({
   /**
   * 对话框取消按钮点击事件
   */
+ /*
   onCancel: function () {
   this.hideModal();
   },
   /**
   * 对话框确认按钮点击事件
   */
+  /*
    onConfirm: function () {
     wx.showToast({
    title: '提交成功',
@@ -69,4 +91,5 @@ Page({
       age:e.detail.value
     })
   }
+  */
 })

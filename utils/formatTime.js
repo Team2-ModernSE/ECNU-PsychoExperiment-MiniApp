@@ -5,7 +5,7 @@ const formatNumber = n => {
 }
 
 function formatTime(date, format) {
-
+  date=new Date(date)
   var formateArr = ['Y', 'M', 'D', 'h', 'm', 's'];
   var returnArr = [];
   returnArr.push(date.getFullYear());
