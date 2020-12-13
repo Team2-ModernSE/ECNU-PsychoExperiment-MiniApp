@@ -18,9 +18,6 @@ Page({
     others: '',
     examineeContact: "",
     examineeOthers: '',
-    examineeName: '',
-    examineeGender: '',
-    examineeStuNumber: '',
     examinerId: ''
   },
   onLaunch: function(){
@@ -28,16 +25,14 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      id: options.id,
-      examineeName: app.globalData.userDetail.name,
-      examineeGender: app.globalData.userDetail.gender,
-      examineeStuNumber: app.globalData.userDetail.stuNumber,
+      id: options.id
     })
     db.collection('experiment').where({
         _id: this.data.id
       })
       .get({
         success: res => {
+          console.log(res)
           this.setData({
             name: res.data[0].name,
             gender: res.data[0].sex,
@@ -79,14 +74,10 @@ Page({
       db.collection('order').add({
         data:{
           expId: this.data.id,
-          expName: this.data.name,
           examineeId: app.globalData.openid,
           isAccepted: 0,
           contact: this.data.examineeContact,
           others: this.data.examineeOthers,
-          examineeName: this.data.examineeName,
-          examineeGender: this.data.examineeGender,
-          examineeStuNumber: this.data.examineeStuNumber,
           examinerId: this.data.examinerId
         }
       })

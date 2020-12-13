@@ -3,11 +3,11 @@
   <view class="card" id="{{index}}" bindtap="cardTap">
     <view class="textframe">
       <view class="statusframe">
-        <text>{{item.examineeName}}</text>
+        <text>{{item.name}}</text>
         <text>{{statusList[item.isAccepted]}}</text>
       </view>
-      <text class="minitext">{{item.examineeGender}}</text>
-      <text class="minitext">学号：{{item.examineeStuNumber}}</text>
+      <text class="minitext">{{item.gender}}</text>
+      <text class="minitext">学号：{{item.stuNumber}}</text>
     </view>
   </view>
 </block>

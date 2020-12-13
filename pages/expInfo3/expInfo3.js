@@ -1,6 +1,7 @@
 // pages/expInfo3/expInfo3.js
 const db=wx.cloud.database()
 var formater=require("../../utils/formatTime")
+const app=getApp()
 
 Page({
   /**
@@ -49,7 +50,8 @@ Page({
       }
     })
     db.collection('order').where({
-      expId: this.data.id
+      expId: this.data.id,
+      examineeId: app.globalData.openid
     })
     .get({
       success: res=>{
