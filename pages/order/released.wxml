@@ -1,8 +1,33 @@
 <!--pages/order/released.wxml-->
-<!--监听自定义事件-->
 <Tabs tabs="{{tabs}}" bindtabsItemChange="handleTabsItemChange">
-  <block wx:if="{{tabs[0].isActive}}">1</block>
-  <block wx:elif="{{tabs[1].isActive}}">2</block>
-  <block wx:elif="{{tabs[2].isActive}}">3</block>
-
+  <block wx:if="{{tabs[0].isActive}}">
+    <block wx:for="{{ongoingExperiments}}" wx:key="index">
+      <view class="card" id="{{index}}" bindtap="cardTap">
+        <view class="textframe">
+          <view class="statusframe">
+            <text>{{item.name}}</text>
+            <text wx:if="{{item.isActive}}">进行中</text>
+            <text wx:if="{{!item.isActive}}">已关闭</text>
+          </view>
+          <text class="minitext">{{item.date}}</text>
+          <text class="minitext">地点：{{item.location}}</text>
+        </view>
+      </view>
+    </block>
+  </block>
+  <block wx:elif="{{tabs[1].isActive}}">
+    <block wx:for="{{stoppedExperiments}}" wx:key="index">
+      <view class="card" id="{{index}}" bindtap="cardTap">
+        <view class="textframe">
+          <view class="statusframe">
+            <text>{{item.name}}</text>
+            <text wx:if="{{item.isActive}}">进行中</text>
+            <text wx:if="{{!item.isActive}}">已关闭</text>
+          </view>
+          <text class="minitext">{{item.date}}</text>
+          <text class="minitext">地点：{{item.location}}</text>
+        </view>
+      </view>
+    </block>
+  </block>
 </Tabs>

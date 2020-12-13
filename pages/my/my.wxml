@@ -16,7 +16,7 @@
     <view class="order_wrap">
       <view class="order_title">我的订单</view>
       <view class="order_content">
-        <navigator url="/pages/order/released">
+        <navigator url="/pages/order/released" wx:if="{{isExaminer}}">
           <view class="order_name">我发布的</view>
         </navigator>
         <navigator url="/pages/order/get?type=1">
@@ -28,15 +28,24 @@
     <view class="info_wrap">
       <view class="info_title">我的信息</view>
       <view class="info_content">
-        <view class="info_name">姓名：{{name}}</view>
-        <view class="info_name">性别:{{sex[index_sex]}}</view>
-        <view class="info_name">年级:{{grade[index_grade]}}</view>
-        <view class="info_name">年龄:{{age}}</view>
+        <view class="info_name">姓名:{{name}}</view>
+        <view class="info_name">性别:{{sex}}</view>
+        <view class="info_name">学号:{{stuNumber}}</view>
+        <view class="info_name" wx:if="{{isExaminer}}">身份:主试</view>
+        <view class="info_name" wx:if="{{!isExaminer}}">身份:被试</view>
+      </view>
+    </view>
+    <view class="info_wrap" wx:if="{{isExaminer}}">
+      <view class="info_title">主试功能</view>
+      <view class="info_content">
+        <view class="info_name">
+          <navigator url="../../pages/release/release">发布实验></navigator>
+        </view>
       </view>
     </view>
   </view>
 </view>
-<!--修改-->
+<!--
 <button class="show-btn" bindtap="showDialogBtn">编辑</button>
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
 <view class="modal-dialog" wx:if="{{showModal}}">
@@ -76,3 +85,4 @@
     </view>
   </view>
 </view>
+-->

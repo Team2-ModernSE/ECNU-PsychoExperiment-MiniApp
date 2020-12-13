@@ -1,13 +1,45 @@
 <!--pages/expInfo2/examineeList/examineeList.wxml-->
-<block wx:for="{{detailList}}" wx:key="index">
-  <view class="card" id="{{index}}" bindtap="cardTap">
-    <view class="textframe">
-      <view class="statusframe">
-        <text>{{item.name}}</text>
-        <text>{{statusList[item.isAccepted]}}</text>
+<Tabs tabs="{{tabs}}" bindtabsItemChange="handleTabsItemChange">
+  <block wx:if="{{tabs[0].isActive}}">
+    <block wx:for="{{unprocessedList}}" wx:key="index">
+      <view class="card" id="{{index}}" bindtap="cardTap">
+        <view class="textframe">
+          <view class="statusframe">
+            <text>{{item.name}}</text>
+            <text>{{statusList[item.isAccepted]}}</text>
+          </view>
+          <text class="minitext">{{item.gender}}</text>
+          <text class="minitext">学号：{{item.stuNumber}}</text>
+        </view>
       </view>
-      <text class="minitext">{{item.gender}}</text>
-      <text class="minitext">学号：{{item.stuNumber}}</text>
-    </view>
-  </view>
-</block>
+    </block>
+  </block>
+  <block wx:if="{{tabs[1].isActive}}">
+    <block wx:for="{{acceptedList}}" wx:key="index">
+      <view class="card" id="{{index}}" bindtap="cardTap">
+        <view class="textframe">
+          <view class="statusframe">
+            <text>{{item.name}}</text>
+            <text>{{statusList[item.isAccepted]}}</text>
+          </view>
+          <text class="minitext">{{item.gender}}</text>
+          <text class="minitext">学号：{{item.stuNumber}}</text>
+        </view>
+      </view>
+    </block>
+  </block>
+  <block wx:if="{{tabs[2].isActive}}">
+    <block wx:for="{{refusedList}}" wx:key="index">
+      <view class="card" id="{{index}}" bindtap="cardTap">
+        <view class="textframe">
+          <view class="statusframe">
+            <text>{{item.name}}</text>
+            <text>{{statusList[item.isAccepted]}}</text>
+          </view>
+          <text class="minitext">{{item.gender}}</text>
+          <text class="minitext">学号：{{item.stuNumber}}</text>
+        </view>
+      </view>
+    </block>
+  </block>
+</Tabs>

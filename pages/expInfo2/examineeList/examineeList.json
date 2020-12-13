@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "被试列表"
+  "navigationBarTitleText": "被试列表",
+  "usingComponents": {
+    "Tabs":"../../../components/Tabs/Tabs"
+  }
 }
