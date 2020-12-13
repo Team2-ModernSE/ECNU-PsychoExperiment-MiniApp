@@ -1,2 +1,8 @@
 <!--pages/order/released.wxml-->
+<!--监听自定义事件-->
+<Tabs tabs="{{tabs}}" bindtabsItemChange="handleTabsItemChange">
+  <block wx:if="{{tabs[0].isActive}}">1</block>
+  <block wx:elif="{{tabs[1].isActive}}">2</block>
+  <block wx:elif="{{tabs[2].isActive}}">3</block>
 
+</Tabs>

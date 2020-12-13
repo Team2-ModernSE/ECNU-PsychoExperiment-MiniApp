@@ -26,9 +26,9 @@ Page({
       success: res=>{
         this.setData({
           id: res.data._id,
-          name: res.data.examineeName,
-          gender: res.data.examineeGender,
-          stuNumber: res.data.examineeStuNumber,
+          name: res.data.name,
+          gender: res.data.gender,
+          stuNumber: res.data.stuNumber,
           contact: res.data.contact,
           others: res.data.others,
           statusIndex: res.data.isAccepted

@@ -1,6 +1,7 @@
 // pages/expInfo2/examineeList/examineeList.js
-const app=getApp()
-const db=wx.cloud.database()
+const app = getApp()
+const db = wx.cloud.database()
+
 
 Page({
 
@@ -9,8 +10,8 @@ Page({
    */
   data: {
     id: null,
-    detailList:[],
-    statusList:['未处理','已通过','已拒绝']
+    detailList: [],
+    statusList: ['未处理', '已通过', '已拒绝']
   },
 
   /**
@@ -33,16 +34,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    db.collection('order').where({
+   var that=this
+   wx.cloud.callFunction({
+    name: 'examineeInfo',
+    data: {
       expId: this.data.id,
-    })
-    .get({
-      success: res=>{
-        this.setData({
-          detailList: res.data,
-        })
-      }
-    })
+    },
+    success: function(res) {
+      console.log(res.result.list)
+      that.setData({
+        detailList: res.result.list
+      })
+    },
+   })
   },
 
   /**
@@ -79,7 +83,7 @@ Page({
   onShareAppMessage: function () {
 
   },
-  cardTap:function(e){
+  cardTap: function (e) {
     wx.setStorage({
       key: 'examineeInfo',
       data: this.data.detailList[e.currentTarget.id]

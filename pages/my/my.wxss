@@ -1,57 +1,173 @@
-/* pages/my/my.wxss */
-.user_bg{
-  height: 45vh;
-  overflow: hidden;
-  background-color: var(--themeColor);
-  filter:blur(10rpx);
+page {
+  background-color:#edece8;
 }
-.user_icon{
+.user_info_wrap {
+ /* overflow: hidden;*/
+  position: relative;
+}
+.user_info_wrap .user_img_wrap {
+  position: relative;
+}
+
+.user_info_wrap .user_img_wrap .user_bg {
+  width:100vw;
+  filter: blur(10rpx);
+}
+.user_info_wrap .user_img_wrap .user_info {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 10%;
+  top: 20%;
+  text-align: center;
+}
+.user_info_wrap .user_img_wrap .user_info .user_icon {
   width: 200rpx;
   height: 200rpx;
   border-radius: 50%;
 }
-.user_name{
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 30%;
+.user_info_wrap .user_img_wrap .user_info .user_name {
+  margin-top: 40rpx;
   color: #000000;
-  font-size:50rpx;
+  font-size:25px;
 }
 
-.release{
-  
-  position: absolute;
-  left: 30%;
-  transform: translateX(-50%);
-  top:40%
+.user_content {
+  position: relative;
 }
-.get{
-  position: absolute;
-  left: 70%;
+.user_content .user_main {
+  /*padding-bottom: 100rpx;*/
+  position: relative;
+  width: 100%;
+  left: 50%;
+  color: #666;
   transform: translateX(-50%);
-  top:40%
+  top: -40rpx;
 }
 
-.name{
-  position: absolute;
-  left: 10%;
-  transform: translateX(-50%);
-  top:55%
+.user_content .user_main .order_wrap {
+  background-color: #fff;
+  margin-top: 30rpx;
+  border-radius: 30rpx;
 }
-.gender{
-  position: absolute;
-  left: 10%;
-  transform: translateX(-50%);
-  top:65%
+
+.user_content .user_main .order_wrap .order_title {
+  padding: 20rpx;
+  font-size:18px;
+  color:#000;
+  border-bottom: solid 1px #ccc;
 }
-.age{
-  position: absolute;
-  left: 10%;
-  transform: translateX(-50%);
-  top:75%
+
+.user_content .user_main .order_wrap .order_content {
+  display: flex;
+  justify-content:space-around;
+}
+.user_content .user_main .orders_wrap .order_content navigator {
+  padding: 15rpx 0;
+  flex: 1;
+  text-align: center;
+}
+
+.user_content .user_main .info_wrap {
+  background-color: #fff;
+  margin-top: 30rpx;
+  border-radius: 30rpx;
+}
+.user_content .user_main .info_wrap .info_title {
+  padding: 20rpx;
+  font-size:18px;
+  border-bottom: 2rpx solid #ccc;
+  color:#000;
+}
+.show-btn {
+  top: 60%;
+  left: 0;
+  color: #22cc22;
+}
+
+.user_content .user_main .info_wrap .info_name {
+  padding: 20rpx ;
+  border-bottom: 1rpx solid #ccc;
+}
+
+
+
+.modal-mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 9000;
+  color: #fff;
+}
+
+.modal-dialog {
+  width: 540rpx;
+  overflow: hidden;
+  position: fixed;
+  top: 50%;
+  left: 0;
+  z-index: 9999;
+  background: #fff;
+  margin: -180rpx 105rpx;
+  border-radius: 36rpx;
+}
+
+.modal-title {
+  padding-top: 50rpx;
+  font-size: 36rpx;
+  color: #030303;
+  text-align: center;
+}
+
+.modal-content {
+  padding: 50rpx 32rpx;
+}
+
+.modal-input {
+  display: flex;
+  background: #fff;
+  border-bottom: 2rpx solid #ddd;
+  border-radius: 4rpx;
+  font-size: 28rpx;
+}
+
+.input {
+  width: 100%;
+  height: 82rpx;
+  font-size: 28rpx;
+  line-height: 28rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  color: #333;
+}
+
+input-holder {
+  color: #666;
+  font-size: 28rpx;
+}
+
+.modal-footer {
+  display: flex;
+  flex-direction: row;
+  height: 86rpx;
+  border-top: 1px solid #dedede;
+  font-size: 34rpx;
+  line-height: 86rpx;
+}
+
+.btn-cancel {
+  width: 50%;
+  color: #666;
+  text-align: center;
+  border-right: 1px solid #dedede;
+}
+
+.btn-confirm {
+  width: 50%;
+  color: #ec5300;
+  text-align: center;
 }

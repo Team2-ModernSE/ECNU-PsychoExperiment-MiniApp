@@ -27,38 +27,40 @@ Page({
       name: 'login',
       data: {},
       success: res => {
+        console.log(res.result.openid)
         app.globalData.openid = res.result.openid
+        wx.getSetting({
+          success: function (res) {
+            if (res.authSetting['scope.userInfo']) { //如果已经授权
+              wx.getUserInfo({
+                success: res => {
+                  app.globalData.userInfo = res.userInfo;
+                  db.collection('user').where({ //检测用户的openid是否在数据库中
+                      _openid: app.globalData.openid
+                    })
+                    .get({
+                      success: function (res) {
+                        if (!res.data.length) { //openid不在数据库中
+                          wx.redirectTo({ //跳转到注册页面
+                            url: '../../pages/register/register',
+                          })
+                        } else {
+                          app.globalData.userDetail = res.data[0]
+                        }
+                      }
+                    })
+                }
+              })
+            } else { //未授权，跳转到授权页面
+              wx.redirectTo({
+                url: '../../pages/auth/auth',
+              })
+            }
+          },
+        })
       }
     })
-    wx.getSetting({
-      success: function (res) {
-        if (res.authSetting['scope.userInfo']) { //如果已经授权
-          wx.getUserInfo({
-            success: res => {
-              app.globalData.userInfo = res.userInfo;
-              db.collection('user').where({ //检测用户的openid是否在数据库中
-                  _openid: app.globalData.openid
-                })
-                .get({
-                  success: function (res) {
-                    if (!res.data.length) { //openid不在数据库中
-                      wx.redirectTo({ //跳转到注册页面
-                        url: '../../pages/register/register',
-                      })
-                    } else {
-                      app.globalData.userDetail = res.data[0]
-                    }
-                  }
-                })
-            }
-          })
-        } else { //未授权，跳转到授权页面
-          wx.redirectTo({
-            url: '../../pages/auth/auth',
-          })
-        }
-      },
-    })
+    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
