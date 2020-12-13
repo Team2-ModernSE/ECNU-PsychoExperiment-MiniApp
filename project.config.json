@@ -72,6 +72,24 @@
         {
           "name": "pages/my/my",
           "pathName": "pages/my/my",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/register",
+          "pathName": "pages/register/register",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/release/release",
+          "pathName": "pages/order/release",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/order/released",
+          "pathName": "pages/order/released",
           "scene": null
         }
       ]
