@@ -12,29 +12,6 @@
 <!--用户信息-->
 <view class="user_content">
   <view class="user_main">
-<<<<<<< HEAD
-    <view class="release">
-      <navigator url="/pages/order/released?type=1">
-        <view class="release_num">0</view>
-        <view class="release_name">我发布的</view>
-      </navigator>
-    </view>
-    <view class="get">
-      <navigator url="/pages/order/get?type=1">
-        <view class="get_num">0</view>
-        <view class="get_name">我领取的</view>
-      </navigator>
-    </view>
-    <view class="name">姓名</view>
-    <view class="gender">性别</view>
-    <view class="age">年龄</view>
-  </view>
-  <view>
-    <navigator url="../../pages/expInfo2/expInfo2?id=0a4429175fd4cf5a0153bdc26c4a14bc">ExpInfo2入口</navigator>
-    <navigator url="../../pages/expInfo3/expInfo3?id=0a4429175fd4cf5a0153bdc26c4a14bc">ExpInfo3入口</navigator>
-    <navigator url="../../pages/release/release">实验创建入口</navigator>
-    <navigator url="../../pages/register/register">注册入口</navigator>
-=======
     <!--订单信息-->
     <view class="order_wrap">
       <view class="order_title">我的订单</view>
@@ -57,7 +34,6 @@
         <view class="info_name">年龄:{{age}}</view>
       </view>
     </view>
->>>>>>> dev
   </view>
 </view>
 <!--修改-->
