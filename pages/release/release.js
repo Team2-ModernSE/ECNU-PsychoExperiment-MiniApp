@@ -2,7 +2,6 @@
 const db = wx.cloud.database()
 const _ = db.command
 const app = getApp()
-var currentCreatedExp = null
 
 Page({
   data: {
@@ -15,7 +14,7 @@ Page({
     duration: 0,
     money: 0,
     contact: "",
-    others: ""
+    others: "",
   },
   onLoad: function () {
     db.collection('user').where({
@@ -94,7 +93,7 @@ Page({
   submitTap: function () {
     var submitName = this.data.name;
     var submitGender = this.data.sex[this.data.index_sex];
-    var submitDate = new Date(this.data.date + ' ' + this.data.time + ':00')
+    var submitDate = new Date((this.data.date).replace(/-/g, "/") + ' ' + this.data.time + ':00')
     var submitDuration = parseInt(this.data.duration)
     var submitLocation = this.data.address;
     var submitMoney = parseInt(this.data.money);

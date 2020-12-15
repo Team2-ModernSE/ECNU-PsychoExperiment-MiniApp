@@ -1,3 +1,4 @@
+<!--
 <view class="tabTit box">
   <view class="flex1{{!tab[index]?' active':''}}" wx:for="{{tabTxt}}" wx:key="type" data-index="{{index}}" bindtap="filterTab">
     <text>{{item}}</text>
@@ -24,45 +25,21 @@
     <text class="{{time_id==4?'active':''}}" data-id="4" data-index="2" data-txt="90分钟以上" bindtap="filter">90分钟以上</text>
 </view>
 
-<view wx:for="{{arrys}}" wx:key="">
-  <view class='item' bindtap='itemclick' data-item='{{item}}'>
-    <!--和普通标签一样使用，is对应的是templates中的name  data是传入template值  -->
-    <template is="template01" data="{{item}}"/>
-  </view>
-</view>
-
 <text>\r\n</text>
 
 <view style="border-bottom:10rpx solid #BBBBBB">
     
 </view>
-
-<view class="cardlist">
-    <view class="topcard" bindtap="toExp">
-        <view>
-            <text style="font-size:45rpx">实验名称1</text>  
+-->
+<block wx:for="{{expList}}" wx:key="index">
+    <view class="card" id="{{index}}" bindtap="cardTap">
+        <view class="textframe">
+            <view class="statusframe">
+                <text>{{item.name}}</text>
+                <text>{{item.money}}元</text>
+            </view>
+            <text class="minitext">{{item.date}}</text>
+            <text class="minitext">地点：{{item.location}}</text>
         </view>
-        <view style="margin-top:20rpx;margin-bottom:20rpx"> 
-            <text style="font-size:40rpx">实验时间</text>
-        </view>
-        <view style="display:flex;justify-content:space-between;"> 
-            <text style="font-size:40rpx">实验地点</text>
-            <text style="font-size:38rpx;color:#888888">实验money</text>
-        </view>    
     </view>
-
-    <view class="card">
-        <view>
-            <text style="font-size:45rpx">实验名称2</text>
-              
-        </view>
-        <view style="margin-top:20rpx;margin-bottom:20rpx"> <text style="font-size:40rpx">实验时间</text></view>
-        <view style="display:flex;justify-content:space-between;"> 
-            <text style="font-size:40rpx">实验地点</text>
-            <text style="font-size:38rpx;color:#888888">实验money</text>
-        </view>  
-    </view>
-    
-</view>
-
-  
+</block>

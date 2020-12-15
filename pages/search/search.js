@@ -1,19 +1,50 @@
 const app = getApp()
+const db = wx.cloud.database()
+const _ = db.command
+var formater=require("../../utils/formatTime")
+
 Page({
   data: {
-    tabTxt: ['性别','酬劳','时长'],
-    tab: [true,true,true],
+    /*
+    tabTxt: ['性别', '酬劳', '时长'],
+    tab: [true, true, true],
     gender_id: 0,
     gender_txt: '',
     price_id: 0,
     price_txt: '',
     time_id: 0,
     time_txt: '',
-    time_min:0,
-    time_max:1000,
-    price_min:0,
-    price_max:1000,
+    */
+    expList: null,
   },
+  onLoad: function() {
+
+  },
+  onShow: function () {
+    var currentDate=new Date()
+    db.collection('experiment').where({
+      isActive: true,
+      date: _.gt(currentDate)
+    })
+    .get({
+      success: res=>{
+        var myExpList=new Array()
+        for(var item of res.data){
+          item.date=formater.formatTime(item.date,'Y-M-D h:m')
+          myExpList.push(item)
+        }
+        this.setData({
+          expList: myExpList
+        })
+      }
+    })
+  },
+  cardTap(e){
+    wx.navigateTo({
+      url: '../../pages/expInfo1/expInfo1?id='+this.data.expList[e.currentTarget.id]._id
+    })
+  }
+  /*
   release: function () {
     wx.navigateTo({
       url: "../../pages/release/release"
@@ -52,7 +83,7 @@ Page({
   },
   filterTab: function (e) {
     var data = [true, true, true],
-    index = e.currentTarget.dataset.index;
+      index = e.currentTarget.dataset.index;
     data[index] = !this.data.tab[index];
     this.setData({
       tab: data
@@ -62,9 +93,9 @@ Page({
   //筛选项点击操作
   filter: function (e) {
     var self = this,
-    id = e.currentTarget.dataset.id,
-    txt = e.currentTarget.dataset.txt,
-    tabTxt = this.data.tabTxt;
+      id = e.currentTarget.dataset.id,
+      txt = e.currentTarget.dataset.txt,
+      tabTxt = this.data.tabTxt;
     switch (e.currentTarget.dataset.index) {
       case '0':
         tabTxt[0] = txt;
@@ -100,6 +131,7 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
+  /*
   onPullDownRefresh: function () {
     //调用刷新时将执行的方法
     this.onRefresh();
@@ -113,94 +145,81 @@ Page({
     //var time_min;
     //var time_max;
     var sex_tag;
-    if(this.data.gender_id==='0'){
+    if (this.data.gender_id === '0') {
       sex_tag = '不限';
-    }
-    else if(this.data.gender_id==='1'){
+    } else if (this.data.gender_id === '1') {
       sex_tag = '男';
-    }
-    else if(this.data.gender_id==='2'){
+    } else if (this.data.gender_id === '2') {
       sex_tag = '女';
-    }
-    else
-    //价钱的上下限，从id转换
-    if(this.data.price_id==='0'){
-      this.data.price_min = 0;
-      this.data.price_max = 1000;
-    }
-    else if(this.data.price_id==='1'){
+    } else
+      //价钱的上下限，从id转换
+      if (this.data.price_id === '0') {
+        this.data.price_min = 0;
+        this.data.price_max = 1000;
+      }
+    else if (this.data.price_id === '1') {
       this.data.price_min = 0;
       this.data.price_max = 30;
-    }
-    else if(this.data.price_id==='2'){
+    } else if (this.data.price_id === '2') {
       this.data.price_min = 31;
       this.data.price_max = 60;
-    }
-    else if(this.data.price_id==='3'){
+    } else if (this.data.price_id === '3') {
       this.data.price_min = 61;
       this.data.price_max = 90;
-    }
-    else if(this.data.price_id==='4'){
+    } else if (this.data.price_id === '4') {
       this.data.price_min = 91;
       this.data.price_max = 1000;
-    }
-    else{
+    } else {
       this.data.price_min = 0;
       this.data.price_max = 1000;
     }
     //设定时间上下限
-    if(this.data.time_id==='0'){
+    if (this.data.time_id === '0') {
       this.data.price_min = 0;
       this.data.price_max = 1000;
-    }
-    else if(this.data.time_id==='1'){
+    } else if (this.data.time_id === '1') {
       this.data.time_min = 0;
       this.data.time_max = 30;
-    }
-    else if(this.data.time_id==='2'){
+    } else if (this.data.time_id === '2') {
       this.data.time_min = 31;
       this.data.time_max = 60;
-    }
-    else if(this.data.time_id==='3'){
+    } else if (this.data.time_id === '3') {
       this.data.time_min = 61;
       this.data.time_max = 90;
-    }
-    else if(this.data.time_id==='4'){
+    } else if (this.data.time_id === '4') {
       this.data.time_min = 91;
       this.data.time_max = 1000;
-    }
-    else{
+    } else {
       this.data.time_min = 0;
       this.data.time_max = 1000;
     }
-    if(this.data.gender_id==='0'){
+    if (this.data.gender_id === '0') {
       db.collection('experiment').where({
-        //sex: sex_tag,
-        //money:_.gte(90).and(_.lte(1000))
-        money: _.gte(this.data.price_min).and(_.lte(this.data.price_max)),
-        time: _.gte(this.data.time_min).and(_.lte(this.data.time_max))
-      })
-      .get({
-        success: function(res) {
-          // res.data 是包含以上定义的两条记录的数组
-          
-        }
-      })
-    }
-    else{
-    db.collection('experiment').where({
-      sex: sex_tag,
-      //money:_.gte(90).and(_.lte(1000))
-      money: _.gte(this.data.price_min).and(_.lte(this.data.price_max)),
-      time: _.gte(this.data.time_min).and(_.lte(this.data.time_max))
-    })
-    .get({
-      success: function(res) {
-        // res.data 是包含以上定义的两条记录的数组
-        console.log(res.data)
-      }
-    })
-  }
-  }
+          //sex: sex_tag,
+          //money:_.gte(90).and(_.lte(1000))
+          money: _.gte(this.data.price_min).and(_.lte(this.data.price_max)),
+          time: _.gte(this.data.time_min).and(_.lte(this.data.time_max))
+        })
+        .get({
+          success: function (res) {
+            // res.data 是包含以上定义的两条记录的数组
 
+          }
+        })
+    } else {
+      db.collection('experiment').where({
+          sex: sex_tag,
+          //money:_.gte(90).and(_.lte(1000))
+          money: _.gte(this.data.price_min).and(_.lte(this.data.price_max)),
+          time: _.gte(this.data.time_min).and(_.lte(this.data.time_max))
+        })
+        .get({
+          success: function (res) {
+            // res.data 是包含以上定义的两条记录的数组
+            console.log(res.data)
+          }
+        })
+    }
+  }
+ */
 })

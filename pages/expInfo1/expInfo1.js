@@ -71,45 +71,62 @@ Page({
       });
     }
     else{
-      db.collection('order').add({
-        data:{
-          expId: this.data.id,
-          examineeId: app.globalData.openid,
-          isAccepted: 0,
-          contact: this.data.examineeContact,
-          others: this.data.examineeOthers,
-          examinerId: this.data.examinerId
-        }
-      })
-      db.collection('user').where({
-        _openid: app.globalData.openid
-      })
-      .update({
-        data:{
-          joinedExp: _.push(this.data.id)
-        },
+      db.collection('order').where({
+        expId: this.data.id,
+        examineeId: app.globalData.openid
+      }).get({
         success: res=>{
-          wx.showModal({ //弹出提示框
-            title: '提示',
-            content: '申请提交成功',
-            showCancel: false,
-            confirmText: '返回',
-            success: function (res) {
-              if (res.confirm) {
-                wx.navigateBack({
-                  delta: 1
+          if(res.data.length){
+            wx.showToast({
+              title: '您已经申请过该实验，请勿重复申请',
+              icon: 'none',
+              duration: 2000,
+              mask: true
+            });
+          }
+          else{
+            db.collection('order').add({
+              data:{
+                expId: this.data.id,
+                examineeId: app.globalData.openid,
+                isAccepted: 0,
+                contact: this.data.examineeContact,
+                others: this.data.examineeOthers,
+                examinerId: this.data.examinerId
+              }
+            })
+            db.collection('user').where({
+              _openid: app.globalData.openid
+            })
+            .update({
+              data:{
+                joinedExp: _.push(this.data.id)
+              },
+              success: res=>{
+                wx.showModal({ //弹出提示框
+                  title: '提示',
+                  content: '申请提交成功',
+                  showCancel: false,
+                  confirmText: '返回',
+                  success: res=> {
+                    if (res.confirm) {
+                      wx.navigateBack({
+                        delta: 1
+                      })
+                    }
+                  }
+                });
+              },
+              fail: res=>{
+                wx.showModal({
+                  title: '注意',
+                  content: '提交失败，请重试',
+                  showCancel: false,
+                  confirmText: '重试'
                 })
               }
-            }
-          });
-        },
-        fail: res=>{
-          wx.showModal({
-            title: '注意',
-            content: '提交失败，请重试',
-            showCancel: false,
-            confirmText: '重试'
-          })
+            })
+          }
         }
       })
     }

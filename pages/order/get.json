@@ -1,5 +1,6 @@
 {
   "usingComponents": {
     "Tabs":"../../components/Tabs/Tabs"
-  }
+  },
+  "navigationBarTitleText": "我领取的实验"
 }

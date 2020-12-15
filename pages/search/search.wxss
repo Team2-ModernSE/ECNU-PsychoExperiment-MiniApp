@@ -80,22 +80,50 @@
     display: block;
 }
 
-.topcard{
-  margin-bottom:25rpx;
-  padding:15rpx;
-  border-bottom:10rpx solid #BBBBBB;
-  border-top:2rpx #dedede solid;
-  margin-top:25rpx;
-  padding-top:10rpx; 
+.card {
+  height: 120rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+  border-radius: 20rpx;
+
+  /* 边 */
+  border: 3rpx solid #E0E3DA;
+  box-shadow:5rpx 5rpx 5rpx 5rpx #E0E3DA;
+
+  background-color: #ffffff;
+  margin: 30rpx;
+
+  /* padding使得文字和图片不至于贴着边框 */
+  padding: 30rpx;
 }
 
-.card{
-  margin-bottom:25rpx;
-  padding:15rpx;
-  border-bottom:10rpx solid #BBBBBB;
+/* 图片 */
+
+.cardimage {
+  width: 100rpx;
+  height: 100rpx;
 }
 
-.cardlist{
+/* 包裹两行文字 */
+
+.textframe {
+  width: 100%;
+  margin-left: 25rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 小字 */
+.minitext {
+  font-size: 30rpx;
+  word-break: break-all;
+  color: #7a7878;
+  margin-top: 10rpx
+}
+
+.statusframe{
   display:flex;
-  flex-direction:column;
+  justify-content:space-between;
 }

@@ -83,7 +83,7 @@
         },
         {
           "name": "pages/release/release",
-          "pathName": "pages/order/release",
+          "pathName": "pages/release/release",
           "query": "",
           "scene": null
         },
