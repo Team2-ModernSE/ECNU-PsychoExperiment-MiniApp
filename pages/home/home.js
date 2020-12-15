@@ -30,7 +30,7 @@ Page({
         console.log(res.result.openid)
         app.globalData.openid = res.result.openid
         wx.getSetting({
-          success: function (res) {
+          success: res=> {
             if (res.authSetting['scope.userInfo']) { //如果已经授权
               wx.getUserInfo({
                 success: res => {
@@ -39,7 +39,7 @@ Page({
                       _openid: app.globalData.openid
                     })
                     .get({
-                      success: function (res) {
+                      success: res => {
                         if (!res.data.length) { //openid不在数据库中
                           wx.redirectTo({ //跳转到注册页面
                             url: '../../pages/register/register',
@@ -78,7 +78,7 @@ Page({
           _openid: app.globalData.openid
         })
         .get({
-          success: function (res) {
+          success: res=>{
             app.globalData.userDetail = res.data[0]
           }
         })

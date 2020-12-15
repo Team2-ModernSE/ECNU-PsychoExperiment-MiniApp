@@ -13,15 +13,14 @@
 
   <view class="mainListContainer">
     <view class="mainListText">实验日期</view>
-    <picker class="mainListPicker" mode="date" value="{{date}}" start="2020-12-7" end="2021-12-7"
-      bindchange="dateChange">
+    <picker class="mainListPicker" mode="date" value="{{date}}" bindchange="dateChange">
       {{date}}
     </picker>
   </view>
 
   <view class="mainListContainer">
     <view class="mainListText">实验时间</view>
-    <picker class="mainListPicker" mode="time" value="{{time}}" start="00:00" end="23:59" bindchange="timeChange">
+    <picker class="mainListPicker" mode="time" value="{{time}}" bindchange="timeChange">
       {{time}}
     </picker>
   </view>

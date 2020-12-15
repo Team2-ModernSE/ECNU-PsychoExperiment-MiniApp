@@ -107,39 +107,55 @@ Page({
         mask: true
       });
     } else {
-      db.collection('user').add({ //向数据库中插入数据
-        data: {
-          name: submitName,
-          stuNumber: submitStuNumber,
-          gender: submitGender,
-          isExaminer: false,
-          createdExp: [],
-          joinedExp: []
-        },
-        success: function (res) { //插入成功
-          wx.showModal({ //弹出提示框
-            title: '提示',
-            content: '个人信息完善成功',
-            showCancel: false,
-            confirmText: '回到首页',
-            success: function (res) {
-              if (res.confirm) {
-                wx.switchTab({
-                  url: '../../pages/home/home',
-                })
-              }
+      db.collection('user').where({
+          _openid: app.globalData.openid
+        })
+        .get({
+          success: res => {
+            if (!res.data.length) {
+              db.collection('user').add({ //向数据库中插入数据
+                data: {
+                  name: submitName,
+                  stuNumber: submitStuNumber,
+                  gender: submitGender,
+                  isExaminer: false,
+                  createdExp: [],
+                  joinedExp: []
+                },
+                success: res => { //插入成功
+                  wx.showModal({ //弹出提示框
+                    title: '提示',
+                    content: '个人信息完善成功',
+                    showCancel: false,
+                    confirmText: '回到首页',
+                    success: function (res) {
+                      if (res.confirm) {
+                        wx.switchTab({
+                          url: '../../pages/home/home',
+                        })
+                      }
+                    }
+                  });
+                },
+                fail: res => { //插入失败，弹出提示框
+                  wx.showModal({
+                    title: '注意',
+                    content: '提交失败，请重试',
+                    showCancel: false,
+                    confirmText: '重试'
+                  })
+                }
+              })
+            } else {
+              wx.showToast({
+                title: '您已经注册，请勿重复提交',
+                icon: 'none',
+                duration: 2000,
+                mask: true
+              });
             }
-          });
-        },
-        fail: function (res) { //插入失败，弹出提示框
-          wx.showModal({
-            title: '注意',
-            content: '提交失败，请重试',
-            showCancel: false,
-            confirmText: '重试'
-          })
-        }
-      })
+          }
+        })
     }
   }
 })
