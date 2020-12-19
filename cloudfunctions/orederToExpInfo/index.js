@@ -4,9 +4,11 @@ const db = cloud.database()
 var $ = db.command.aggregate
 
 exports.main = async (event, context) => {
+  const wxContext = cloud.getWXContext()
+
   return db.collection('order').aggregate()
     .match({
-      examineeId: event.examineeId
+      examineeId: wxContext.OPENID
     })
     .lookup({
       from: 'experiment',

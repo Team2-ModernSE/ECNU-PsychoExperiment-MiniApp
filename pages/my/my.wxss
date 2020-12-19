@@ -1,6 +1,3 @@
-page {
-  background-color:#edece8;
-}
 .user_info_wrap {
  /* overflow: hidden;*/
   position: relative;
@@ -45,9 +42,11 @@ page {
 }
 
 .user_content .user_main .order_wrap {
-  background-color: #fff;
+  background-color: #ffffff;
   margin-top: 30rpx;
   border-radius: 30rpx;
+  border: 3rpx solid #E0E3DA;
+  box-shadow:5rpx 5rpx 5rpx 5rpx #E0E3DA;
 }
 
 .user_content .user_main .order_wrap .order_title {
@@ -68,9 +67,11 @@ page {
 }
 
 .user_content .user_main .info_wrap {
-  background-color: #fff;
+  background-color: #ffffff;
   margin-top: 30rpx;
   border-radius: 30rpx;
+  border: 3rpx solid #E0E3DA;
+  box-shadow:5rpx 5rpx 5rpx 5rpx #E0E3DA;
 }
 .user_content .user_main .info_wrap .info_title {
   padding: 20rpx;

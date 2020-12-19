@@ -9,7 +9,7 @@
             <text wx:if="{{item.isActive}}">进行中</text>
             <text wx:if="{{!item.isActive}}">已关闭</text>
           </view>
-          <text class="minitext">{{item.date}}</text>
+          <text class="minitext">注册截止日期：{{item.expireDate}}</text>
           <text class="minitext">地点：{{item.location}}</text>
         </view>
       </view>
@@ -24,7 +24,7 @@
             <text wx:if="{{item.isActive}}">进行中</text>
             <text wx:if="{{!item.isActive}}">已关闭</text>
           </view>
-          <text class="minitext">{{item.date}}</text>
+          <text class="minitext">注册截止日期：{{item.expireDate}}</text>
           <text class="minitext">地点：{{item.location}}</text>
         </view>
       </view>

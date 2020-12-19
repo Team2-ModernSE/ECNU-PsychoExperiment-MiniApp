@@ -1,0 +1,12 @@
+/* pages/expInfo1/dateSelector/dateSelector.wxss */
+.nextButton {
+  width: 90%;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 38rpx;
+  margin: 0 auto;
+  color: #fff;
+  background-color: #19b84d;
+  border-radius: 15rpx;
+}

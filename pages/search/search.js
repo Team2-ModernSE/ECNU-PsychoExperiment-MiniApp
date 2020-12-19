@@ -21,16 +21,18 @@ Page({
 
   },
   onShow: function () {
+    var userDetail = app.globalData.userDetail
     var currentDate=new Date()
     db.collection('experiment').where({
       isActive: true,
-      date: _.gt(currentDate)
+      expireDate: _.gt(currentDate),
+      sex: _.or(_.eq('不限'),_.eq(userDetail.gender))
     })
     .get({
       success: res=>{
         var myExpList=new Array()
         for(var item of res.data){
-          item.date=formater.formatTime(item.date,'Y-M-D h:m')
+          item.expireDate=formater.formatTime(item.expireDate,'Y-M-D')
           myExpList.push(item)
         }
         this.setData({

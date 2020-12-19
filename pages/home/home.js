@@ -1,22 +1,28 @@
 // pages/home/home.js
 const app = getApp();
 const db = wx.cloud.database();
+const DEFAULT_PAGE = 0;
+var formater=require("../../utils/formatTime")
 
 Page({
 
   /**
    * 页面的初始数据
    */
+  startPageX: 0,
+  currentView: DEFAULT_PAGE,
   data: {
     imgUrls: [
       '/images/scene1.jpeg',
       '/images/scene2.jpg',
       '/images/scene3.jpg'
     ],
-    indicatorDots: false,
-    autoplay: false,
-    interval: 5000,
-    duration: 1000,
+    toView: `card_${DEFAULT_PAGE}`,
+    list: ['Javascript', 'Typescript', 'Java', 'PHP', 'Go'],
+    isExaminer: false,
+    recentExpList: [],
+    unprocessedList: [],
+    postList: []
   },
 
   /**
@@ -27,7 +33,6 @@ Page({
       name: 'login',
       data: {},
       success: res => {
-        console.log(res.result.openid)
         app.globalData.openid = res.result.openid
         wx.getSetting({
           success: res=> {
@@ -46,6 +51,9 @@ Page({
                           })
                         } else {
                           app.globalData.userDetail = res.data[0]
+                          this.setData({
+                            isExaminer: res.data[0].isExaminer
+                          })
                         }
                       }
                     })
@@ -80,9 +88,60 @@ Page({
         .get({
           success: res=>{
             app.globalData.userDetail = res.data[0]
+            this.setData({
+              isExaminer: res.data[0].isExaminer
+            })
           }
         })
     }
+    else{
+      var detail=app.globalData.userDetail
+      this.setData({
+        isExaminer: detail.isExaminer
+      })
+    }
+    db.collection('post').where({
+      isVisible: true
+    })
+    .get({
+      success: res=>{
+        this.setData({
+          postList: res.data
+        })
+      }
+    })
+    var that=this
+    wx.cloud.callFunction({
+      name: 'orederToExpInfo',
+      data:{},
+      success: res=>{
+        var date=new Date()
+        date=date.setDate(date.getDate()+6)
+        date=new Date(date)
+        var myRecentExpList=new Array()
+        for(var item of res.result.list){
+          if((new Date(item.examineeSelectedDate))<date&&item.isAccepted=='1'){
+            (item.examineeSelectedDate)=formater.formatTime(item.examineeSelectedDate,'Y-M-D')
+            myRecentExpList.push(item)
+          }
+        }
+        that.setData({
+          recentExpList: myRecentExpList
+        })
+      }
+    })
+    wx.cloud.callFunction({
+      name: 'getUnprocessedRequest',
+      data:{},
+      success: res=>{
+        for(var i in res.result.list){
+          (res.result.list[i]).examineeSelectedDate=formater.formatTime((res.result.list[i]).examineeSelectedDate,'Y-M-D')
+        }
+        that.setData({
+          unprocessedList:res.result.list
+        })
+      }
+    })
   },
 
   /**
@@ -120,61 +179,41 @@ Page({
 
   },
 
-  changeIndicatorDots: function (e) {
-    this.setData({
-      indicatorDots: !this.data.indicatorDots
-    })
+  touchStart(e) {
+    this.startPageX = e.changedTouches[0].pageX;
   },
-  changeAutoplay: function (e) {
-    this.setData({
-      autoplay: !this.data.autoplay
-    })
-  },
-  intervalChange: function (e) {
-    this.setData({
-      interval: e.detail.value
-    })
-  },
-  durationChange: function (e) {
-    this.setData({
-      duration: e.detail.value
-    })
-  },
-  redirect1: function () {
-    wx.switchTab({
-      url: '../../pages/search/search',
-    })
-  },
-  redirect2: function () {
-    wx.switchTab({
-      url: '../../pages/my/my',
-    })
-  },
-  redirect3: function () {
-    wx.navigateTo({
-      url: '../../pages/order/get',
-    })
-  },
-  redirect4: function () {
-    db.collection('user').where({
-      _openid: app.globalData.openid
-    })
-    .get({
-      success: res=>{
-        if(res.data[0].isExaminer){
-          wx.navigateTo({
-            url: '../../pages/order/released',
-          })
-        }
-        else{
-          wx.showToast({
-            title: '您暂无主试权限',
-            icon: 'none',
-            duration: 2000,
-            mask: true
-          });
-        }
+
+  touchEnd(e) {
+    const moveX = e.changedTouches[0].pageX - this.startPageX;
+    const maxPage = this.data.list.length - 1;
+    if (Math.abs(moveX) >= 150){
+      if (moveX > 0) {
+        this.currentView = this.currentView !== 0 ? this.currentView - 1 : 0;
+      } else {
+        this.currentView = this.currentView !== maxPage ? this.currentView + 1 : maxPage;
       }
+    }
+    this.setData({
+      toView: `card_${this.currentView}`
+    });
+  },
+  expTap(e){
+    wx.navigateTo({
+      url: '../../pages/expInfo3/expInfo3?id='+this.data.recentExpList[e.currentTarget.id].expId
     })
-  }
+  },
+  requestTap(e){
+    wx.navigateTo({
+      url: '../../pages/expInfo2/examineeList/examineeList?id='+this.data.unprocessedList[e.currentTarget.id].expId
+    })
+  },
+  newsTap(e){
+    wx.setStorage({
+      data: this.data.postList[e.currentTarget.id.slice(5)],
+      key: 'postInfo',
+    })
+    wx.navigateTo({
+      url: 'post/post',
+    })
+  },
 })

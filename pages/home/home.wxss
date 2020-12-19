@@ -1,26 +1,91 @@
-swiper{
-  width:100%;
-  height:450rpx;
+.section-title{
+  padding:10px 30px 10px;
+  font-size:25px;
+  font-weight:light
 }
-swiper image{
+
+.scroll-box{
+  white-space: nowrap;
+  height: 55vh;
+}
+
+.card-box{
+  display: inline-block;
+  background: #ffffff;
+  width: 100vw;
+}
+
+.card-text{
+  margin: 3vh 10vw;
+  font-size: 20px;
+}
+
+.card{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  height: 40vh;
+  width: 80vw;
+  margin: 3vh 10vw;
+  font-size: 40px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow:5rpx 5rpx 5rpx 5rpx #E0E3DA;
+  border: 3rpx solid #E0E3DA;
+}
+
+.card image{
   display:block;
   width:100%;
   height:100%;
+  border-radius: 20px;
 }
 
-
-.img-button {
-  width: 80%;
-  margin-top: 45rpx;
-  background-color:rgb(36, 187, 74);
-  border-radius: 98rpx; 
+.info-card {
+  height: 120rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  
+  border-radius: 20rpx;
+
+  /* 边 */
+  border: 3rpx solid #E0E3DA;
+  box-shadow:5rpx 5rpx 5rpx 5rpx #E0E3DA;
+
+  background-color: #ffffff;
+  margin: 55rpx;
+  width: 80%;
+  /* padding使得文字和图片不至于贴着边框 */
+  padding: 30rpx;
 }
-.btnImg {
-  margin-right: 8rpx;
-  width: 46rpx;
-  height: 46rpx;
+
+.infocard-image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+/* 包裹两行文字 */
+
+.textframe {
+  width: 100%;
+  margin-left: 25rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 小字 */
+.minitext {
+  font-size: 30rpx;
+  word-break: break-all;
+  color: #7a7878;
+  margin-top: 10rpx
+}
+
+.cautiontext {
+  font-size: 40rpx;
+  word-break: break-all;
+  color: #7a7878;
+  margin-top: 10rpx
 }

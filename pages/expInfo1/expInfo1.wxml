@@ -9,14 +9,14 @@
     <text class='mainListInput'>{{gender}}</text>
   </view>
 
-  <view class="mainListContainer">
+  <view class="mainListTextareaContainer">
     <view class="mainListText">实验日期</view>
-    <text class='mainListInput'>{{date}}</text>
+    <textarea class='mainListTextarea' value="{{availableDateStr}}" disabled='true'></textarea>
   </view>
 
   <view class="mainListContainer">
-    <view class="mainListText">实验时间</view>
-    <text class='mainListInput'>{{time}}</text>
+    <view class="mainListText">申请截止日期</view>
+    <text class='mainListInput'>{{expireDate}}</text>
   </view>
 
   <view class="mainListContainer">
@@ -42,6 +42,11 @@
   <view class="mainListTextareaContainer">
     <view class="mainListText">主试备注</view>
     <textarea class='mainListTextarea' disabled='true' value="{{others}}"></textarea>
+  </view>
+
+  <view class="mainListContainer">
+    <view class="mainListText">被试可用日期</view>
+    <navigator class='mainListInput' url='dateSelector/dateSelector'>{{examineeSelectedDateStr}}</navigator>
   </view>
 
   <view class="mainListTextareaContainer">

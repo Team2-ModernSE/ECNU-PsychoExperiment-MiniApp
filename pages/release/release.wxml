@@ -11,17 +11,14 @@
     </picker>
   </view>
 
-  <view class="mainListContainer">
+  <view class="mainListTextareaContainer">
     <view class="mainListText">实验日期</view>
-    <picker class="mainListPicker" mode="date" value="{{date}}" bindchange="dateChange">
-      {{date}}
-    </picker>
+    <navigator url="dateSelector/dateSelector" class='mainListTextarea'>{{availableDateStr}}</navigator>
   </view>
-
   <view class="mainListContainer">
-    <view class="mainListText">实验时间</view>
-    <picker class="mainListPicker" mode="time" value="{{time}}" bindchange="timeChange">
-      {{time}}
+    <view class="mainListText">申请截止日期</view>
+    <picker class="mainListPicker" mode="date" value="{{date}}" bindchange="dateChange">
+      {{expireDate}}
     </picker>
   </view>
 

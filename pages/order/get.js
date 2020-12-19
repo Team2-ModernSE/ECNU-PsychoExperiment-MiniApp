@@ -35,15 +35,14 @@ Page({
     var that=this
     wx.cloud.callFunction({
       name: 'orederToExpInfo',
-      data: {
-        examineeId: app.globalData.openid
-      },
+      data: {},
       success: function(res){
         var myUnprocessedList = new Array()
         var myAcceptedList = new Array()
         var myRefusedList = new Array()
         for (var item of res.result.list) {
-          item.date=formater.formatTime(item.date,'Y-M-D h:m')
+          item.expireDate=formater.formatTime(item.expireDate,'Y-M-D')
+          item.examineeSelectedDate=formater.formatTime(item.examineeSelectedDate,'Y-M-D')
           if (item.isAccepted == "0") {
             myUnprocessedList.push(item)
           } else if (item.isAccepted == "1") {

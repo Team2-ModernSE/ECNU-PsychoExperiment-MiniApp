@@ -1,4 +1,6 @@
 // pages/expInfo2/examineeList/examineeInfo/examineeInfo.js
+var formater=require("../../../../utils/formatTime")
+
 const db=wx.cloud.database()
 
 Page({
@@ -14,7 +16,9 @@ Page({
     contact: '',
     others: '',
     statusIndex: 0,
-    statusArray: ['待定','已通过','已拒绝']
+    statusArray: ['待定','已通过','已拒绝'],
+    comment: '',
+    selectedDate: ''
   },
 
   /**
@@ -31,7 +35,9 @@ Page({
           stuNumber: res.data.stuNumber,
           contact: res.data.contact,
           others: res.data.others,
-          statusIndex: res.data.isAccepted
+          statusIndex: res.data.isAccepted,
+          selectedDate: formater.formatTime(res.data.examineeSelectedDate,'Y-M-D'),
+          comment: res.data.comment
         })
       }
     })
@@ -91,13 +97,18 @@ Page({
       statusIndex: e.detail.value
     })
   },
-
+  commentInput: function(e) {
+    this.setData({
+      comment: e.detail.value
+    })
+  },
   submitTap: function(){
     db.collection('order').where({
       _id: this.data.id
     }).update({
       data:{
-        isAccepted: this.data.statusIndex
+        isAccepted: this.data.statusIndex,
+        comment: this.data.comment
       },
       success: function(){
         wx.showModal({ //弹出提示框

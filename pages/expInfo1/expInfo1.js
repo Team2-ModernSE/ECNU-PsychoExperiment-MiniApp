@@ -9,8 +9,9 @@ Page({
     id: null,
     name: '',
     gender: '',
-    date: '',
-    time: '',
+    expireDate: '',
+    availableDate: [],
+    availableDateStr: '',
     duration: '',
     location: '',
     money: '',
@@ -18,6 +19,8 @@ Page({
     others: '',
     examineeContact: "",
     examineeOthers: '',
+    examineeSelectedDate: null,
+    examineeSelectedDateStr: '',
     examinerId: ''
   },
   onLaunch: function(){
@@ -32,12 +35,11 @@ Page({
       })
       .get({
         success: res => {
-          console.log(res)
           this.setData({
             name: res.data[0].name,
             gender: res.data[0].sex,
-            date: formater.formatTime(res.data[0].date,"Y-M-D"),
-            time: formater.formatTime(res.data[0].date,"h:m"),
+            availableDate: res.data[0].availableDate,
+            expireDate: formater.formatTime(res.data[0].expireDate,"Y-M-D"),
             duration: res.data[0].time+"分钟",
             location: res.data[0].location,
             money: res.data[0].money + "元",
@@ -45,11 +47,39 @@ Page({
             others: res.data[0].others,
             examinerId: res.data[0].examinerId
           })
+          var myAvailableDateStr = ""
+          for (var i in this.data.availableDate) {
+            if (i != (this.data.availableDate).length - 1)
+              myAvailableDateStr += (formater.formatTime(this.data.availableDate[i], "Y-M-D")+'\n')
+            else
+              myAvailableDateStr += formater.formatTime(this.data.availableDate[i], "Y-M-D")
+          }
+          this.setData({
+            availableDateStr: myAvailableDateStr
+          })
+          wx.setStorage({
+            data: this.data.availableDate,
+            key: 'examineeAvailableDate'
+          })
         }
       })
   },
   onShow: function () {
-    
+    wx.getStorage({
+      key: 'examineeSelectedDate',
+      success: res=>{
+        res.data=new Date(res.data)
+        this.setData({
+          examineeSelectedDate: res.data,
+          examineeSelectedDateStr: formater.formatTime(res.data,'Y-M-D')
+        })
+      },
+      fail: err=>{
+        this.setData({
+          examineeSelectedDateStr: "点击选择可用日期"
+        })
+      }
+    })
   },
   examineeContactInput: function(e){
     this.setData({
@@ -65,6 +95,14 @@ Page({
     if(this.data.examineeContact==''){
       wx.showToast({
         title: '请输入联系方式',
+        icon: 'none',
+        duration: 2000,
+        mask: true
+      });
+    }
+    else if(this.data.examineeSelectedDate==null){
+      wx.showToast({
+        title: '请选择日期',
         icon: 'none',
         duration: 2000,
         mask: true
@@ -89,7 +127,9 @@ Page({
               data:{
                 expId: this.data.id,
                 examineeId: app.globalData.openid,
-                isAccepted: 0,
+                isAccepted: '0',
+                examineeSelectedDate: this.data.examineeSelectedDate,
+                comment: '',
                 contact: this.data.examineeContact,
                 others: this.data.examineeOthers,
                 examinerId: this.data.examinerId
@@ -103,6 +143,12 @@ Page({
                 joinedExp: _.push(this.data.id)
               },
               success: res=>{
+                wx.removeStorage({
+                  key: 'examineeAvailableDate',
+                })
+                wx.removeStorage({
+                  key: 'examineeSelectedDate',
+                })
                 wx.showModal({ //弹出提示框
                   title: '提示',
                   content: '申请提交成功',

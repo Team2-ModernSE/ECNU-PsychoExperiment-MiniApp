@@ -6,11 +6,11 @@
       <view class="card" id="{{index}}" bindtap="cardTap">
         <view class="textframe">
           <view class="statusframe">
-            <text>{{item.name}}</text>
-            <text>{{statusList[item.isAccepted]}}</text>
-          </view>
-          <text class="minitext">{{item.date}}</text>
-          <text class="minitext">地点：{{item.location}}</text>
+          <text>{{item.name}}</text>
+          <text>{{statusList[item.isAccepted]}}</text>
+        </view>
+        <text class="minitext">实验参加时间：{{item.examineeSelectedDate}}</text>
+        <text class="minitext">地点：{{item.location}}</text>
         </view>
       </view>
     </block>
@@ -23,7 +23,7 @@
             <text>{{item.name}}</text>
             <text>{{statusList[item.isAccepted]}}</text>
           </view>
-          <text class="minitext">{{item.date}}</text>
+          <text class="minitext">实验参加时间：{{item.examineeSelectedDate}}</text>
           <text class="minitext">地点：{{item.location}}</text>
         </view>
       </view>
@@ -37,7 +37,7 @@
             <text>{{item.name}}</text>
             <text>{{statusList[item.isAccepted]}}</text>
           </view>
-          <text class="minitext">{{item.date}}</text>
+          <text class="minitext">实验参加时间：{{item.examineeSelectedDate}}</text>
           <text class="minitext">地点：{{item.location}}</text>
         </view>
       </view>
