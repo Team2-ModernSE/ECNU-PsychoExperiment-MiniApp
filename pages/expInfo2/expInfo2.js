@@ -13,8 +13,8 @@ Page({
     id: null,
     name: '',
     gender: '',
-    date: '',
-    time: '',
+    expireDate: '',
+    availableDate: [],
     duration: '',
     location: '',
     money: '',
@@ -22,7 +22,8 @@ Page({
     others: '',
     isActive: false,
     statusIndex: 0,
-    statusArray: ['进行中', '已关闭']
+    statusArray: ['进行中', '已关闭'],
+    availableDateStr: ''
   },
 
   /**
@@ -40,8 +41,8 @@ Page({
           this.setData({
             name: res.data[0].name,
             gender: res.data[0].sex,
-            date: formater.formatTime(res.data[0].date, "Y-M-D"),
-            time: formater.formatTime(res.data[0].date, "h:m"),
+            expireDate: formater.formatTime(res.data[0].expireDate, "Y-M-D"),
+            availableDate: res.data[0].availableDate,
             duration: res.data[0].time + "分钟",
             location: res.data[0].location,
             money: res.data[0].money + "元",
@@ -49,6 +50,16 @@ Page({
             others: res.data[0].others,
             isActive: res.data[0].isActive,
             statusIndex: res.data[0].isActive ? 0 : 1
+          })
+          var myAvailableDateStr = ""
+          for (var i in this.data.availableDate) {
+            if (i != (this.data.availableDate).length - 1)
+              myAvailableDateStr += (formater.formatTime(this.data.availableDate[i], "Y-M-D")+'\n')
+            else
+              myAvailableDateStr += formater.formatTime(this.data.availableDate[i], "Y-M-D")
+          }
+          this.setData({
+            availableDateStr: myAvailableDateStr
           })
         }
       })

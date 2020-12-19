@@ -35,7 +35,7 @@ Page({
         var myOngoingExperiments=new Array()
         var myStoppedExperiments=new Array()
         for(var item of res.data){
-          item.date=formater.formatTime(item.date,'Y-M-D h:m')
+          item.expireDate=formater.formatTime(item.expireDate,'Y-M-D')
           if(item.isActive){
             myOngoingExperiments.push(item)
           }
@@ -65,10 +65,6 @@ Page({
       tabs:myTabs,
       index:myIndex
     });
-  },
-
-  convertTime(date){
-    return formater.formatTime(date,"Y-M-D h:m")
   },
 
   cardTap(e){

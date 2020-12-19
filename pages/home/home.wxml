@@ -1,29 +1,51 @@
-<swiper indicator-dots="{{indicatorDots}}"
-  autoplay="true" interval="{{interval}}" duration="{{duration}}"
-  indicator-dots="true" circular="true">
-
-  <block wx:for="{{imgUrls}}">
-    <swiper-item>
-      <image src="{{item}}" class="slide-image" width="355" height="150"/>
-    </swiper-item>
-  </block>
-</swiper>
-
 <view>
-  <button type="primary"class="img-button" plain bindtap ='redirect1'>
-    <image class='btnImg' src='/icon/homepage_a.jpg'></image>
-    <view>领取实验</view>
-  </button>
-  <button type="primary"class="img-button" plain bindtap ='redirect2'>
-    <image class='btnImg' src='/icon/homepage_b.jpg'></image>
-    <view>个人中心</view>
-  </button>
-  <button type="primary"class="img-button" plain bindtap ='redirect3'>
-    <image class='btnImg' src='/icon/homepage_c.jpg'></image>
-    <view>我领取的</view>
-  </button>
-  <button type="primary" class="img-button" plain bindtap ='redirect4'>
-    <image class='btnImg' src='/icon/homepage_d.jpg'></image>
-    <view>我发布的</view>
-  </button>
+  <text class="section-title">最新消息</text>
+  <block wx:if="{{postList.length}}">
+    <scroll-view class="scroll-box" scroll-x scroll-with-animation scroll-into-view="{{toView}}"
+      bindtouchstart="touchStart" bindtouchend="touchEnd">
+      <view wx:for="{{postList}}" wx:key="{{item}}" class="card-box" id="card_{{index}}" bindtap='newsTap'>
+        <view class="card">
+          <image src="{{item.headimage}}" class="card-image"></image>
+        </view>
+        <text class="card-text">{{item.title}}\n</text>
+      </view>
+    </scroll-view>
+  </block>
+  <block wx:else>
+    <text class="cautiontext">暂无消息</text>
+  </block>
+</view>
+<view>
+  <text class="section-title">近期参与实验</text>
+  <block wx:if="{{recentExpList.length}}">
+    <block wx:for="{{recentExpList}}" wx:key="index">
+      <view class="info-card" id="{{index}}" bindtap="expTap">
+        <view class="textframe">
+          <text>{{item.name}}</text>
+          <text class="minitext">实验参加时间：{{item.examineeSelectedDate}}</text>
+          <text class="minitext">地点：{{item.location}}</text>
+        </view>
+      </view>
+    </block>
+  </block>
+  <block wx:else>
+    <text class="cautiontext">暂无实验</text>
+  </block>
+</view>
+<view wx:if="{{isExaminer}}">
+  <text class="section-title">未处理请求</text>
+  <block wx:if="{{unprocessedList.length}}">
+    <block wx:for="{{unprocessedList}}" wx:key="index">
+      <view class="info-card" id="{{index}}" bindtap="requestTap">
+        <view class="textframe">
+          <text>{{item.examineeInfo[0].name}}</text>
+          <text class="minitext">实验：{{item.name}}</text>
+          <text class="minitext">实验参加时间：{{item.examineeSelectedDate}}</text>
+        </view>
+      </view>
+    </block>
+  </block>
+  <block wx:else>
+    <text class="cautiontext">暂无请求</text>
+  </block>
 </view>

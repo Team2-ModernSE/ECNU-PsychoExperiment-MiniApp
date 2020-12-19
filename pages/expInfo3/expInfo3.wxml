@@ -10,14 +10,14 @@
     <text class='mainListInput'>{{gender}}</text>
   </view>
 
-  <view class="mainListContainer">
+  <view class="mainListTextareaContainer">
     <view class="mainListText">实验日期</view>
-    <text class='mainListInput'>{{date}}</text>
+    <textarea class='mainListTextarea' value="{{availableDateStr}}" disabled='true'></textarea>
   </view>
 
   <view class="mainListContainer">
-    <view class="mainListText">实验时间</view>
-    <text class='mainListInput'>{{time}}</text>
+    <view class="mainListText">参加日期</view>
+    <text class='mainListInput'>{{selectedDate}}</text>
   </view>
 
   <view class="mainListContainer">
@@ -58,5 +58,10 @@
   <view class="mainListContainer">
     <view class="mainListText">处理结果</view>
     <text class='mainListInput'>{{statusArray[statusIndex]}}</text>
+  </view>
+
+  <view class="mainListTextareaContainer">
+    <view class="mainListText">处理理由</view>
+    <textarea class='mainListTextarea' disabled="true" value="{{comment}}"></textarea>
   </view>
 </view>

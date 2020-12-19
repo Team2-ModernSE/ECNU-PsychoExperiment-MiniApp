@@ -1,0 +1,3 @@
+<!--pages/expInfo1/dateSelector/dateSelector.wxml-->
+<calendar config="{{calendarConfig}}" id="calendar" bind:afterCalendarRender="afterCalendarRender" />
+<view class='nextButton' bindtap='confirmTap'>确定</view>

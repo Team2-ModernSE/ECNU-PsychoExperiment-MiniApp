@@ -16,6 +16,11 @@
     <text class='mainListInput'>{{stuNumber}}</text>
   </view>
 
+  <view class="mainListContainer">
+    <view class="mainListText">可用日期</view>
+    <text class='mainListInput'>{{selectedDate}}</text>
+  </view>
+
   <view class="mainListTextareaContainer">
     <view class="mainListText">联系方式</view>
     <textarea class='mainListTextarea' disabled="true" value="{{contact}}"></textarea>
@@ -31,6 +36,11 @@
     <picker bindchange="bindStatusChange" class="mainListPicker" value="{{statusIndex}}" range="{{statusArray}}">
       {{statusArray[statusIndex]}}
     </picker>
+  </view>
+
+  <view class="mainListTextareaContainer">
+    <view class="mainListText">处理理由</view>
+    <textarea class='mainListTextarea' placeholder="在此处填入你的处理理由" bindinput="commentInput" value="{{comment}}"></textarea>
   </view>
 </view>
 <view class='nextButton' bindtap='submitTap'>提交</view>

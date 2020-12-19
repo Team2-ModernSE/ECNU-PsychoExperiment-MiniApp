@@ -2,19 +2,21 @@
 const db = wx.cloud.database()
 const _ = db.command
 const app = getApp()
+var formater = require("../../utils/formatTime")
 
 Page({
   data: {
     name: "",
     sex: ['不限', '男', '女'],
     index_sex: 0,
-    date: '0000-00-00',
-    time: "00:00",
+    expireDate: '0000-00-00',
     address: "",
     duration: 0,
     money: 0,
     contact: "",
     others: "",
+    availableDate: [],
+    availableDateStr: ''
   },
   onLoad: function () {
     db.collection('user').where({
@@ -40,6 +42,35 @@ Page({
         }
       })
   },
+  onShow: function () {
+    wx.getStorage({
+      key: 'expDate',
+      success: res => {
+        for (var i in res.data) {
+          res.data[i] = new Date(res.data[i])
+        }
+        (res.data)
+        this.setData({
+          availableDate: res.data
+        })
+        var myAvailableDateStr = ""
+        for (var i in res.data) {
+          if (i != res.data.length - 1)
+            myAvailableDateStr += (formater.formatTime(res.data[i], "Y-M-D") + '\n')
+          else
+            myAvailableDateStr += formater.formatTime(res.data[i], "Y-M-D")
+        }
+        this.setData({
+          availableDateStr: myAvailableDateStr
+        })
+      },
+      fail: err => {
+        this.setData({
+          availableDateStr: '请选择实验日期'
+        })
+      }
+    })
+  },
   nameInput(e) {
     this.setData({
       name: e.detail.value
@@ -50,14 +81,16 @@ Page({
       index_sex: e.detail.value
     })
   },
+  /*
   timeChange(e) {
     this.setData({
       time: e.detail.value
     })
   },
+  */
   dateChange(e) {
     this.setData({
-      date: e.detail.value
+      expireDate: e.detail.value
     })
   },
   durationInput(e) {
@@ -93,12 +126,13 @@ Page({
   submitTap: function () {
     var submitName = this.data.name;
     var submitGender = this.data.sex[this.data.index_sex];
-    var submitDate = new Date((this.data.date).replace(/-/g, "/") + ' ' + this.data.time + ':00')
+    var submitExpireDate = new Date((this.data.expireDate).replace(/-/g, "/") + ' 23:59:59')
     var submitDuration = parseInt(this.data.duration)
     var submitLocation = this.data.address;
     var submitMoney = parseInt(this.data.money);
     var submitContact = this.data.contact;
     var submitOthers = this.data.others;
+    var submitAvailableDate = this.data.availableDate;
 
     if (submitName == "") {
       wx.showToast({
@@ -107,14 +141,21 @@ Page({
         duration: 2000,
         mask: true
       });
-    } else if (submitDate < new Date() || submitDate.toDateString() == "Invalid Date") {
+    } else if (!submitAvailableDate.length || submitAvailableDate == null) {
       wx.showToast({
-        title: '请输入合法的日期和时间',
+        title: '请输入实验日期',
         icon: 'none',
         duration: 2000,
         mask: true
       });
-    } else if (submitDuration.toString() == "NaN" || submitDuration == null) {
+    } else if (submitExpireDate < new Date() || submitExpireDate.toDateString() == "Invalid Date" || submitExpireDate > submitAvailableDate[submitAvailableDate.length - 1]) {
+      wx.showToast({
+        title: '请输入合法的截止日期',
+        icon: 'none',
+        duration: 2000,
+        mask: true
+      });
+    } else if (submitDuration.toString() == "NaN" || submitDuration == null || submitDuration == 0) {
       wx.showToast({
         title: '请输入合法的实验时长',
         icon: 'none',
@@ -147,7 +188,8 @@ Page({
         data: {
           name: submitName,
           sex: submitGender,
-          date: submitDate,
+          expireDate: submitExpireDate,
+          availableDate: submitAvailableDate,
           time: submitDuration,
           location: submitLocation,
           money: submitMoney,
@@ -176,6 +218,9 @@ Page({
                   delta: 1
                 })
               }
+              wx.removeStorage({
+                key: 'expDate',
+              })
             }
           });
         },

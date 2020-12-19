@@ -38,7 +38,7 @@
                 <text>{{item.name}}</text>
                 <text>{{item.money}}元</text>
             </view>
-            <text class="minitext">{{item.date}}</text>
+            <text class="minitext">截止时间：{{item.expireDate}}</text>
             <text class="minitext">地点：{{item.location}}</text>
         </view>
     </view>

@@ -12,12 +12,15 @@
     "pages/expInfo2/expInfo2",
     "pages/expInfo2/examineeList/examineeList",
     "pages/expInfo2/examineeList/examineeInfo/examineeInfo",
-    "pages/expInfo3/expInfo3"
+    "pages/expInfo3/expInfo3",
+    "pages/release/dateSelector/dateSelector",
+    "pages/expInfo1/dateSelector/dateSelector",
+    "pages/home/post/post"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarBackgroundColor": "#FFFFFF",
     "navigationBarTitleText": "ECNU心理被试招募小程序",
     "navigationBarTextStyle": "black"
   },
@@ -46,5 +49,5 @@
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2",
-  "cloud":true
+  "cloud": true
 }
