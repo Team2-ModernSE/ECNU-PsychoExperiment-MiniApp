@@ -18,6 +18,7 @@
 .card-text{
   margin: 3vh 10vw;
   font-size: 20px;
+  font-weight: lighter;
 }
 
 .card{
