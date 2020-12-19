@@ -16,8 +16,10 @@
 }
 
 .card-text{
+  font-family: "Noto Sans";
   margin: 3vh 10vw;
   font-size: 20px;
+  font-weight: lighter;
 }
 
 .card{
