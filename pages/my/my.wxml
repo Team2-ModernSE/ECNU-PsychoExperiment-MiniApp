@@ -1,12 +1,10 @@
 <!--pages/my/my.wxml-->
 <!--头像和用户名称-->
 <view class="user_info_wrap">
-  <view class="user_img_wrap">
-    <image class="user_bg" src="{{userinfo.avatarUrl}}"></image>
-    <view class="user_info">
-      <image class="user_icon" src="{{userinfo.avatarUrl}}"></image>
-      <view class="user_name">{{userinfo.nickName}}</view>
-    </view>
+  <image class="user_bg"></image>
+  <view class="user_info">
+    <image class="user_icon" src="{{userinfo.avatarUrl}}"></image>
+    <view class="user_name">{{userinfo.nickName}}</view>
   </view>
 </view>
 <!--用户信息-->
