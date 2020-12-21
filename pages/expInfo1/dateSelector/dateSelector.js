@@ -21,10 +21,14 @@ Page({
     wx.getStorage({
       key: 'examineeAvailableDate',
       success: res=>{
+        var shownDate=new Array()
         for(var i in res.data){
-          res.data[i]=formater.formatTime(res.data[i],'Y-M-D')
+          var date=new Date(res.data[i]);
+          if(date>=new Date()){
+            shownDate.push(formater.formatTime(date,'Y-M-D'))
+          }
         }
-        calendar.enableDates(res.data)
+        calendar.enableDates(shownDate)
       }
     })
   },
