@@ -25,7 +25,7 @@ Page({
         for(var i in res.data){
           var date=new Date(res.data[i]);
           if(date>=new Date()){
-            shownDate.push(formater.formatTime(date,'Y-M-D'))
+            shownDate.push([date.getFullYear(),date.getMonth()+1,date.getDate()].join('-'))
           }
         }
         calendar.enableDates(shownDate)

@@ -51,7 +51,7 @@ Page({
           var myAvailableDateStr = ""
           for (var i in this.data.availableDate) {
             if (i != (this.data.availableDate).length - 1)
-              myAvailableDateStr += (formater.formatTime(this.data.availableDate[i], "Y-M-D") + '\n')
+              myAvailableDateStr += (formater.formatTime(this.data.availableDate[i], "Y-M-D") + ', ')
             else
               myAvailableDateStr += formater.formatTime(this.data.availableDate[i], "Y-M-D")
           }
