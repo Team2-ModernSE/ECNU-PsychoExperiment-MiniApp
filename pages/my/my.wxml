@@ -12,7 +12,7 @@
   <view class="user_main">
     <!--订单信息-->
     <view class="order_wrap">
-      <view class="order_title">我的订单</view>
+      <view class="order_title">我的实验</view>
       <view class="order_content">
         <navigator url="/pages/order/released" wx:if="{{isExaminer}}">
           <view class="order_name">我发布的</view>
