@@ -19,6 +19,9 @@ Page({
     availableDateStr: ''
   },
   onLoad: function () {
+    wx.removeStorage({
+      key: 'expDate',
+    })
     db.collection('user').where({
         _openid: app.globalData.openid
       })
@@ -218,9 +221,6 @@ Page({
                   delta: 1
                 })
               }
-              wx.removeStorage({
-                key: 'expDate',
-              })
             }
           });
         },
