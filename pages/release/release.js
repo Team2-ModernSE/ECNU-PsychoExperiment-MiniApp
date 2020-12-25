@@ -59,7 +59,7 @@ Page({
         var myAvailableDateStr = ""
         for (var i in res.data) {
           if (i != res.data.length - 1)
-            myAvailableDateStr += (formater.formatTime(res.data[i], "Y-M-D") + '\n')
+            myAvailableDateStr += (formater.formatTime(res.data[i], "Y-M-D") + ', ')
           else
             myAvailableDateStr += formater.formatTime(res.data[i], "Y-M-D")
         }
@@ -72,6 +72,11 @@ Page({
           availableDateStr: '请选择实验日期'
         })
       }
+    })
+  },
+  dateSelectorTap(e){
+    wx.navigateTo({
+      url: 'dateSelector/dateSelector',
     })
   },
   nameInput(e) {
