@@ -52,6 +52,7 @@
   line-height: 50rpx;
   font-size: 30rpx;
   text-align: left;
+  display: flex;
 }
 
 .mainListTextareaContainer {

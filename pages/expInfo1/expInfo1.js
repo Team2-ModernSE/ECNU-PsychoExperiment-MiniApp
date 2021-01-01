@@ -27,6 +27,9 @@ Page({
     
   },
   onLoad: function (options) {
+    wx.removeStorage({
+      key: 'examineeSelectedDate',
+    })
     this.setData({
       id: options.id
     })
@@ -145,9 +148,6 @@ Page({
               success: res=>{
                 wx.removeStorage({
                   key: 'examineeAvailableDate',
-                })
-                wx.removeStorage({
-                  key: 'examineeSelectedDate',
                 })
                 wx.showModal({ //弹出提示框
                   title: '提示',

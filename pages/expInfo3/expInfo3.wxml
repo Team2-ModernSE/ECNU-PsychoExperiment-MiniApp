@@ -12,7 +12,7 @@
 
   <view class="mainListTextareaContainer">
     <view class="mainListText">实验日期</view>
-    <textarea class='mainListTextarea' value="{{availableDateStr}}" disabled='true'></textarea>
+    <textarea class='mainListTextarea' value="{{availableDateStr}}" disabled='true' maxlength="-1"></textarea>
   </view>
 
   <view class="mainListContainer">
