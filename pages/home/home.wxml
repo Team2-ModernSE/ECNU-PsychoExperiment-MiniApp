@@ -16,7 +16,7 @@
   </block>
 </view>
 <view>
-  <text class="section-title">近期参与实验</text>
+  <text class="section-title">即将参与的实验</text>
   <block wx:if="{{recentExpList.length}}">
     <block wx:for="{{recentExpList}}" wx:key="index">
       <view class="info-card" id="{{index}}" bindtap="expTap">
